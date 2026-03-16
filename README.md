@@ -4,6 +4,8 @@ Repository dedicata al Corso di Laurea in Informatica presso l'Università degli
 
 **NOTA**: Il materiale è relativo solamente al gruppo 1, se siete di altri gruppi è molto probabie che avrete professori diversi, vi conviene in quel caso usare materiale relativo a quello specifico professore. Potete trovare tutto il materiale necessario e tutti i gruppi telegram [quì](https://t.me/+7HOZaOMbgSphNGM0) se vi dovessero servire altro
 
+**NOTA**: le cartelle indicate con completato sono praticamente gli esami che ho fatto quindi non per forza hanno contenuto dentro o contenuto completo, semplicemente è un mio remider per le cose che ho fatto
+
 ## Contenuti
 
 Questa repository raccoglie materiale didattico, appunti, dispense e progetti relativi al percorso universitario.
