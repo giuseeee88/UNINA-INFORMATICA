@@ -1,0 +1,38 @@
+1. Scheduling HDD e importanza del "tocco" all' esterno negli algoritmi Circular
+2. Utilità della TLB, cosa succede senza quest' ultima
+3. Utilità della tabella delle pagine
+4. Struttura della memoria (layout)
+5. Cosa accade in caso di sovrapposizione di stacK e heap
+6. Compare and swap, a cosa serve?
+7. Svantaggio della prelazione
+8. Perchè conviene il paging?
+9. Gestione del page fault
+10. Layout delle pagine
+11. Uso del bit di validità
+12. NUMA (architettura)
+13. Soft and hard affinity
+14. SRTF vs RR differenza
+15. Significato di starvation
+16. User e kernel thread
+17. Come il sistema operativo percepisce i thread?
+18. Bit di modifica
+19. Inversione di priorità
+20. Variabile di condizione 
+21. Funzionamento dello spinlock
+22. Signal and continue/signal and wait
+23. Monitoring dei frame utilizzati durante la sostituzione nelle pagine
+24. pure demand paging
+25. Come è servita una interruzione
+26. Architettura monolitica
+27. Come la memoria segregata comunica con il resto
+28. Fasi di boot e tipi di disco (domanda da 30) 
+29. Condizioni necessarie per un deadlock
+30. Definizione dei seek time 
+31. Perchè le pagine di grandi dimensioni provocano maggiore overhead?
+32. Binding indirizzo logico ed ottenimento dell' indirizzo fisico
+33. Frammentazione interna ed esterna differenze
+34. Allocazione contigua e le sue problematiche 
+35. Problema della frammntazione interna nello specifico
+36. strutture dati utilizzate nel kernel file system e definizione di quest'ultimo
+37. memorizzazione dei file su disco e (continua,indicizzata,concatenata)
+

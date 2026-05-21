@@ -1,0 +1,175 @@
+public interface Noleggiabile{
+    public boolean isDisponibile();
+}
+
+public class Libro implements Noleggiabile{
+    public String titolo;
+    public boolean inPrestito;
+
+    public Libro(String titolo, boolean inPrestito){
+        this.titolo = titolo;
+        this.inPrestito = inPrestito;
+    }
+    public boolean isDisponibile(){
+        return !this.inPrestito;
+    }
+}
+
+public class Utente{
+    public String nome;
+    public List<Libro> libro;
+
+    public Utente(String nome){
+    this.nome = nome;
+    this.libro = new ArrayList<Libro>();
+    }
+    public void prendiInPrestito(Libro l){
+        this.libro.add(l);
+    }
+}
+
+
+
+
+
+
+
+esercizio 2:
+
+public interface Tracciabile{
+    public String getStato();
+}
+
+public class Pacco implements Tracciabile{
+    public String codiceId;
+    public boolean consegnato;
+
+    public Pacco(String codiceId, boolean consegnato){
+        this.codiceId = codiceId;
+        this.consegnato = consegnato;
+    }
+    @Override //questo l'ho inserito vedendo il codice corretto da te non sapevo fosse un caso di override probabilmente non ho ancora occhio
+    public String getStato(){
+        if (this.consegnato == true){
+            return "consegnato";
+        }
+        else{
+            return "in transito";
+        }
+    }
+}
+
+public class PaccoEspresso extends Pacco{
+    public int oreMassime;
+
+    public PaccoEspresso(String codiceId, boolean consegnato, int oreMassime){
+        super(codiceId, consegnato);
+        this.oreMassime = oreMassime;
+    }
+}
+
+public class Corriere{
+    public String nomeAutista;
+    public List<Pacco> pacco;
+
+    public Corriere(String nomeAutista){
+        this.nomeAutista = nomeAutista;
+        this.pacco = new ArrayList<Pacco>();
+    }
+
+    public void caricaPacco(Pacco p){
+        this.pacco.add(p);
+    }
+}
+
+
+
+
+esercizio 3:
+
+
+public interface Consumabile{
+    public double getCalorie();
+}
+
+public class Piatto implements Consumabile{
+    public String nome;
+    public double calorieBase;
+
+    public Piatto(String nome, double calorieBase){
+        this.nome = nome;
+        this.calorieBase = calorieBase;
+    }
+
+    public double getCalorie(){
+        return calorieBase;
+    }
+}
+
+public class PiattoSpeciale extends Piatto{
+    public double calorieExtra;
+
+    public PiattoSpeciale(String nome, double calorieBase, double calorieExtra){
+        super(nome, calorieBase);
+        this.calorieExtra = calorieExtra;
+    }
+
+    @Override
+    public double getCalorie(){
+        return this.calorieBase + this.calorieExtra;
+    }
+}
+
+public class Cliente{
+    public String nome;
+    public List<Piatto> piatto;
+
+    public Cliente(String nome){
+        this.nome = nome;
+        this.piatto = new ArrayList<Piatto>();
+    }
+
+    public void ordinaPiatto(Piatto p){
+        this.piatto.add(p);
+    }
+}
+
+public class Tavolo{
+    public int numeroTavolo;
+    public Cliente nome;
+
+    public Tavolo(int numeroTavolo, Cliente nome){
+        this.numeroTavolo = numeroTavolo;
+        this.nome = nome;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
