@@ -1,0 +1,155 @@
+# Domande con Risposte di Sistemi Operativi (ATTENZIONE SONO POCHE LE DOMANDE QUINDI STUDIATE PERCHÈ NON SONO TUTTE LE POSSIBILI)
+
+**1. Scheduling HDD e importanza del "tocco" all'esterno negli algoritmi Circular**
+Negli algoritmi di scheduling del disco come il C-SCAN (Circular SCAN), la testina si muove in una sola direzione servendo le richieste. Quando arriva all'estremo del disco ("tocco all'esterno"), ritorna immediatamente all'inizio senza servire alcuna richiesta durante il viaggio di ritorno. Il "tocco" fino all'ultimo cilindro è fondamentale perché garantisce un tempo di attesa molto più uniforme per tutte le richieste, trattando i cilindri come una lista circolare ed evitando che le tracce centrali vengano servite molto più spesso rispetto a quelle periferiche.
+
+**2. Utilità della TLB, cosa succede senza quest'ultima**
+La TLB (Translation Lookaside Buffer) è una cache associativa ad altissima velocità integrata nella MMU che memorizza le traduzioni più recenti degli indirizzi (da pagina logica a frame fisico). 
+Senza la TLB, per ogni accesso in memoria da parte della CPU sarebbero necessari **due accessi alla memoria centrale**: il primo per leggere la Tabella delle Pagine (per trovare il frame) e il secondo per accedere al dato reale. Questo dimezzerebbe di fatto le prestazioni del sistema.
+
+**3. Utilità della tabella delle pagine**
+La tabella delle pagine è la struttura dati fondamentale per la memoria virtuale e la paginazione. Serve a mappare i numeri di pagina logica (generati dalla CPU) nei corrispondenti numeri di frame fisici (in RAM). Permette a un processo di avere uno spazio di indirizzamento contiguo dal suo punto di vista, anche se fisicamente i suoi dati sono frammentati e sparsi nella memoria RAM.
+
+**4. Struttura della memoria (layout)**
+Il layout dello spazio di indirizzamento di un processo in memoria è generalmente diviso in segmenti:
+* **Testo (Code):** Il codice binario eseguibile.
+* **Dati (Data):** Variabili globali e statiche inizializzate.
+* **BSS:** Variabili globali e statiche non inizializzate (impostate a zero).
+* **Heap:** Memoria allocata dinamicamente a runtime (es. con `malloc` in C). Cresce verso l'alto.
+* **Stack:** Utilizzato per chiamate a funzione, parametri e variabili locali. Cresce verso il basso (verso l'Heap).
+
+**5. Cosa accade in caso di sovrapposizione di stack e heap**
+Se l'heap e lo stack crescono al punto da collidere, si verifica un esaurimento della memoria disponibile per il processo. Il sistema operativo, tramite la MMU, rileverà un accesso a un indirizzo di memoria non valido o violazione dei limiti, generando un'eccezione (tipicamente un *Segmentation Fault* o un *Out of Memory error*) e procederà alla terminazione forzata del processo per proteggere il resto del sistema.
+
+**6. Compare and swap, a cosa serve?**
+La `Compare and Swap` (CAS) è un'istruzione hardware atomica (non interrompibile). Controlla se il valore in una locazione di memoria è uguale a un valore atteso; se lo è, lo sostituisce con un nuovo valore, altrimenti non fa nulla. Serve come blocco fondamentale per implementare meccanismi di sincronizzazione di alto livello (come gli spinlock e i semafori) e algoritmi *lock-free* in ambienti concorrenti, garantendo la mutua esclusione.
+
+**7. Svantaggio della prelazione**
+La prelazione (preemption) comporta un *overhead* prestazionale. Ogni volta che un processo viene prelazionato, il sistema operativo deve eseguire un *Context Switch*: salvare lo stato dei registri (PCB), invalidare e ripopolare la cache (inclusa la TLB) e caricare lo stato del nuovo processo. Inoltre, nei sistemi prelazionabili è obbligatorio l'uso rigoroso di meccanismi di sincronizzazione complessi, poiché un processo può essere interrotto nel mezzo di una sezione critica.
+
+**8. Perché conviene il paging?**
+La paginazione (paging) elimina il problema della frammentazione esterna, in quanto ogni frame libero in memoria può essere assegnato a qualsiasi processo ne abbia bisogno, senza necessità che la memoria fisica sia contigua. Inoltre, separa la memoria logica da quella fisica, rendendo possibile implementare la *Memoria Virtuale* (Demand Paging), consentendo di eseguire programmi che sono più grandi della memoria RAM fisicamente disponibile.
+
+**9. Gestione del page fault**
+Un page fault avviene quando un processo tenta di accedere a una pagina valida che al momento risiede su disco e non in RAM. 
+Fasi: 1) Trap al sistema operativo; 2) Il SO verifica se l'accesso è valido; 3) Cerca un frame libero in RAM (se non c'è, usa un algoritmo di rimpiazzo); 4) Avvia un'operazione di I/O per leggere la pagina dal disco e metterla nel frame; 5) Aggiorna la tabella delle pagine (impostando il bit di validità); 6) Riavvia l'istruzione che ha causato il fault.
+
+**10. Layout delle pagine**
+L'indirizzo logico generato dalla CPU in un sistema di paginazione è diviso in due parti:
+* **Numero di pagina ($p$):** Utilizzato come indice per cercare nella tabella delle pagine l'indirizzo base del frame.
+* **Offset di pagina ($d$):** Lo scostamento all'interno della pagina. Rimane inalterato e viene concatenato all'indirizzo del frame fisico per formare l'indirizzo fisico finale.
+
+**11. Uso del bit di validità**
+In ogni riga (entry) della tabella delle pagine, il bit di validità/invalidità indica se la pagina corrispondente è attualmente caricata in memoria centrale (RAM). Se è "valido", l'accesso è consentito. Se è "invalido", la pagina non è in memoria (si trova nello swap su disco) oppure l'indirizzo è illegale; un accesso a questa pagina scatena un *page fault*.
+
+**12. NUMA (architettura)**
+NUMA (*Non-Uniform Memory Access*) è un'architettura per sistemi multiprocessore. La memoria RAM è divisa e assegnata a specifici processori (nodi). Un processore può accedere alla memoria locale molto più velocemente rispetto a quanto impiega ad accedere alla memoria remota (la memoria collegata agli altri processori del sistema).
+
+**13. Soft and hard affinity**
+L'affinità del processore definisce la tendenza di un processo a rimanere in esecuzione sulla stessa CPU per sfruttare i dati rimasti nella cache L1/L2.
+* **Soft Affinity:** Il SO tenta di mantenere il processo sulla stessa CPU, ma non lo garantisce (può spostarlo per bilanciare il carico).
+* **Hard Affinity:** Il processo è esplicitamente vincolato (es. tramite *sched_setaffinity* in Linux) a eseguire solo su uno o più core specifici e il SO non può migrarlo altrove.
+
+**14. SRTF vs RR differenza**
+* **SRTF (Shortest Remaining Time First):** È la versione prelazionabile del SJF. Sceglie il processo con il tempo residuo di esecuzione più breve. Ottimizza il tempo medio di attesa, ma rischia di causare *starvation* per i processi lunghi.
+* **RR (Round Robin):** Assegna a ogni processo una piccola quantità di tempo (quanto o *time slice*). Scaduto il tempo, il processo viene messo in fondo alla coda. È equo (nessuna starvation) ed eccellente per i sistemi interattivi.
+
+**15. Significato di starvation**
+La *starvation* (attesa indefinita o inedia) è la situazione in cui un processo pronto per l'esecuzione attende per un tempo indefinito l'assegnazione della CPU (o di altre risorse) perché i meccanismi di scheduling continuano a preferire e assegnare le risorse ad altri processi (ad esempio, a priorità più alta).
+
+**16. User e kernel thread**
+* **User Thread:** Gestiti interamente nello spazio utente da una libreria, senza l'intervento del SO. Sono molto veloci da creare e gestire, ma se uno di questi thread si blocca (es. per una system call I/O), il SO blocca l'intero processo (compresi gli altri thread associati).
+* **Kernel Thread:** Creati e gestiti direttamente dal SO. Più pesanti da creare per via del context switch in kernel mode, ma permettono vero parallelismo: se un thread si blocca, il kernel può schedulare un altro thread dello stesso processo.
+
+**17. Come il sistema operativo percepisce i thread?**
+Dipende dal modello di threading. Se si usano solo *User Threads* (modello molti-a-uno), il SO vede un solo processo monolitico e non ha consapevolezza dei thread al suo interno. Se si usano *Kernel Threads* (modello uno-a-uno o molti-a-molti), il SO percepisce i thread come unità schedulabili distinte (spesso chiamate *Lightweight Processes* in sistemi come Linux, dove processo e thread sono concettualmente simili per lo scheduler).
+
+**18. Bit di modifica**
+Il bit di modifica (o *Dirty Bit*) si trova nella tabella delle pagine. Viene settato dall'hardware quando la CPU scrive (modifica) una pagina in memoria. Durante la sostituzione delle pagine, se il dirty bit è impostato, il SO sa che la pagina deve essere prima riscritta su disco (aggiornando la copia nello swap). Se non è settato, significa che la pagina è rimasta in sola lettura, e può essere sovrascritta immediatamente senza fare I/O, risparmiando tempo.
+
+**19. Inversione di priorità**
+È un problema di scheduling in cui un processo a priorità alta rimane in attesa di una risorsa (es. un semaforo) detenuta da un processo a priorità bassa, il quale viene però prelazionato da un processo a priorità media. Di fatto, il processo a priorità media ritarda indirettamente quello a priorità alta. Si risolve con il protocollo di **Ereditarietà della priorità** (*Priority Inheritance*).
+
+**20. Variabile di condizione**
+È uno strumento di sincronizzazione (usato spesso all'interno dei Monitor) che permette a un thread di sospendere la propria esecuzione finché una determinata condizione logica non si verifica. Fornisce operazioni di `Wait` (il thread si blocca e rilascia il lock) e `Signal` (un altro thread segnala che la condizione si è verificata, risvegliando il thread in attesa).
+
+**21. Funzionamento dello spinlock**
+Lo spinlock è un tipo di lock (blocco) basato sull'attesa attiva (*busy waiting*). Se un thread tenta di acquisire un lock già occupato, entra in un ciclo infinito (utilizzando istruzioni atomiche come CAS) verificando in continuazione se il lock si è liberato. Consuma cicli di CPU, ma è utile su sistemi multiprocessore se si prevede che il lock venga rilasciato in tempi brevissimi, evitando così il costoso overhead di un context switch.
+
+**22. Signal and continue / signal and wait**
+Riguardano la semantica dei Monitor quando un thread fa una `Signal` su una variabile di condizione:
+* **Signal and Continue (Mesa):** Il thread che lancia la signal continua la sua esecuzione. Il thread risvegliato viene messo nella coda dei processi pronti e prenderà possesso del monitor in seguito.
+* **Signal and Wait (Hoare):** Il thread che lancia la signal cede immediatamente il controllo del monitor al thread risvegliato e si mette in attesa che quest'ultimo finisca o esca dal monitor.
+
+**23. Monitoring dei frame utilizzati durante la sostituzione nelle pagine**
+L'algoritmo perfetto (LRU - *Least Recently Used*) richiederebbe di aggiornare un registro per ogni singolo accesso in memoria, comportando un overhead hardware enorme. Pertanto, il monitoraggio si fa per approssimazione usando un **Bit di Riferimento**. Questo bit viene impostato a 1 dall'hardware ogni volta che la pagina viene letta/scritta. Algoritmi come la "Seconda Scelta" (Clock) scansionano in modo circolare questi bit azzerandoli: se un bit è 0, la pagina non è stata usata di recente e viene sostituita.
+
+**24. Pure demand paging**
+La *paginazione su richiesta pura* è l'estremo del demand paging: un processo viene avviato con **nessuna pagina in memoria fisica** (zero frame allocati). La prima istruzione causerà immediatamente un page fault, costringendo il SO a caricare la prima pagina dal disco. Le pagine vengono caricate *solo ed esclusivamente* nel momento in cui vengono effettivamente richiamate dalla CPU.
+
+**25. Come è servita una interruzione**
+1. Un dispositivo hardware invia un segnale sulla linea di interrupt.
+2. La CPU completa l'istruzione corrente e salva l'indirizzo di ritorno (Program Counter) e lo stato dei registri sullo stack.
+3. In base all'ID dell'interruzione, la CPU consulta il *Vettore delle Interruzioni* per trovare l'indirizzo della ISR (Interrupt Service Routine).
+4. Esegue l'ISR (il driver o la routine del kernel associata).
+5. Esegue un'istruzione speciale (es. `IRET`) che ripristina lo stato salvato e restituisce il controllo al programma interrotto.
+
+**26. Architettura monolitica**
+Un SO monolitico inserisce tutte le funzionalità core (gestione della memoria, file system, I/O, driver di periferica, scheduling) all'interno di un unico grande spazio di indirizzamento in kernel-mode (il kernel). Vantaggio: altissime prestazioni poiché i componenti comunicano direttamente. Svantaggio: scarsa affidabilità, perché un errore in un singolo driver può far crashare l'intero sistema operativo.
+
+**27. Come la memoria segregata comunica con il resto**
+Poiché i processi hanno spazi di indirizzamento separati e isolati (memoria segregata per sicurezza), non possono leggere/scrivere direttamente l'uno nella memoria dell'altro. Per comunicare si appoggiano all'**IPC** (*Inter-Process Communication*) fornita dal kernel, che include: memorie condivise (*Shared Memory* mappate dalla MMU), passaggio di messaggi (*Message Passing*, Pipe, Socket) o segnali.
+
+**28. Fasi di boot e tipi di disco (domanda da 30)**
+**Fasi del Boot:**
+1. **Accensione/Firmware:** Il BIOS/UEFI esegue il POST (Power-On Self Test) per controllare l'hardware.
+2. **Boot sector:** Il firmware cerca il dispositivo di avvio, legge il primo settore (MBR o tabella GPT) ed esegue il codice trovato (First-stage bootloader).
+3. **Bootloader:** Viene caricato il bootloader completo (es. GRUB), che sa come leggere il file system.
+4. **Caricamento del Kernel:** Il bootloader carica l'immagine del Kernel in RAM e gli passa il controllo.
+5. **Inizializzazione del SO:** Il kernel inizializza le strutture dati, i driver, monta il file system root (`/`) e lancia il primo processo utente (es. `init` o `systemd`), che avvia gli altri servizi.
+
+**Tipi di disco:**
+* **HDD (Hard Disk Drive):** Dischi magnetici a rotazione meccanica con testine di lettura/scrittura mobili. Elevata latenza (seek time) ma economici per grandi archiviazione.
+* **SSD (Solid State Drive):** Basati su memorie flash NAND, senza parti meccaniche. Accesso istantaneo e transfer rate elevatissimo.
+* **NVM/NVMe:** Protocolli e dischi basati su PCIe, progettati per massimizzare il parallelismo delle memorie flash moderne eliminando i colli di bottiglia dei controller SATA.
+
+**29. Condizioni necessarie per un deadlock**
+Affinché si verifichi uno stallo mortale (deadlock), devono verificarsi **simultaneamente** le 4 condizioni di Coffman:
+1. **Mutua Esclusione:** Le risorse non possono essere condivise (solo un processo alla volta può usare una risorsa).
+2. **Hold and Wait (Possesso e attesa):** Un processo possiede almeno una risorsa ed è in attesa di acquisirne altre attualmente detenute da altri.
+3. **No Preemption (Nessuna prelazione):** Le risorse non possono essere forzatamente sottratte al processo che le detiene; devono essere rilasciate volontariamente.
+4. **Attesa Circolare:** Esiste un ciclo chiuso di processi dove $P_0$ attende $P_1$, $P_1$ attende $P_2$, ..., e $P_n$ attende $P_0$.
+
+**30. Definizione dei seek time**
+Il *seek time* (tempo di ricerca) in un disco rigido (HDD) è il tempo impiegato dal braccio meccanico per spostare la testina di lettura/scrittura dalla traccia attuale al cilindro in cui è posizionato il settore desiderato. È la componente preponderante del tempo di latenza di un disco magnetico.
+
+**31. Perché le pagine di grandi dimensioni provocano maggiore overhead?**
+Da un lato le pagine grandi riducono l'overhead della tabella delle pagine e i miss nella TLB, ma dall'altro **aumentano drammaticamente la frammentazione interna**: se un processo ha bisogno di pochi KB di memoria e la dimensione della pagina è di 2MB o 1GB, l'intero resto della pagina viene sprecato. Inoltre, se il SO deve eseguire operazioni di swapping su disco (page-in/page-out) e un solo byte cambia, deve scrivere in memoria di massa decine o centinaia di megabyte (overhead di I/O).
+
+**32. Binding indirizzo logico ed ottenimento dell'indirizzo fisico**
+Il binding associa i riferimenti simbolici del codice agli indirizzi di memoria reali. Può avvenire a tempo di compilazione (codice assoluto), di caricamento (codice rilocabile) o di esecuzione (binding dinamico). Nei SO moderni si usa il binding a **tempo di esecuzione**: la CPU genera un indirizzo logico. La MMU (hardware) lo intercetta al volo e lo somma al *Registro Base* (in allocazione contigua) oppure interroga la *Tabella delle Pagine* per ottenere il numero di frame, formando l'indirizzo fisico reale inviato al bus della memoria.
+
+**33. Frammentazione interna ed esterna differenze**
+* **Frammentazione Interna:** Memoria allocata a un processo ma non utilizzata. Avviene quando l'unità di allocazione (es. la pagina o un blocco fisso) è più grande di ciò che il processo ha richiesto. Lo spazio in eccesso "dentro" il blocco è perso.
+* **Frammentazione Esterna:** Avviene con l'allocazione dinamica di dimensioni variabili (o contigua). Nello spazio di memoria ci sono vari "buchi" liberi che nel totale sommano a sufficienza per soddisfare una nuova richiesta, ma poiché non sono adiacenti (contigui), la richiesta viene respinta.
+
+**34. Allocazione contigua e le sue problematiche**
+L'allocazione contigua prevede che ogni processo occupi un singolo blocco di celle di memoria consecutive. 
+**Problematiche:** Soffre gravemente di *frammentazione esterna*. Diventa difficile trovare un "buco" abbastanza grande per caricare nuovi processi, costringendo il SO a fare "compattazione" della memoria (molto lenta e costosa in termini di tempo di CPU). Inoltre è rigida, rendendo complesso far crescere dinamicamente lo spazio (es. l'heap) di un processo in esecuzione se non ha spazio adiacente libero.
+
+**35. Problema della frammentazione interna nello specifico**
+È il difetto congenito della **Paginazione**. Poiché la memoria RAM è divisa in frame di dimensione fissa (es. 4 KB), un processo riceve memoria sempre in multipli interi della dimensione della pagina. Se un processo richiede 9 KB di memoria, il SO deve dargli 3 pagine (12 KB in totale). Gli ultimi 3 KB della terza pagina sono allocati al processo ma inutilizzati, e non potranno mai essere dati a un altro processo. Se ci sono migliaia di processi, la somma dei frammenti finali può portare a un notevole spreco di RAM.
+
+**36. Strutture dati utilizzate nel kernel file system e definizione di quest'ultimo**
+Il *File System* è l'astrazione logica creata dal SO per memorizzare, recuperare, gestire e nominare informazioni in modo persistente sui dispositivi di memoria di massa.
+Strutture dati in memoria centrale (nel Kernel):
+* **Tabella di montaggio (Mount Table):** Traccia i file system attualmente attivi nel sistema.
+* **Directory Structure Cache:** Mantiene in RAM i percorsi e le directory usate di recente per accelerare la ricerca.
+* **System-wide open-file table:** Una tabella globale che contiene una copia del FCB (File Control Block / inode) e info su ogni file attualmente aperto da qualsiasi processo.
+* **Per-process open-file table:** Tabella per ogni singolo processo (i "File Descriptor") che punta alle voci della system-wide table.
+
+**37. Memorizzazione dei file su disco e (continua, indicizzata, concatenata)**
+Sono i metodi in cui il SO alloca i blocchi su disco ai file:
+* **Allocazione Contigua:** Il file occupa una sequenza ininterrotta di blocchi sul disco. *Pro:* Lette/scritture sequenziali e dirette velocissime. *Contro:* Frammentazione esterna, difficile prevedere quanto far crescere un file.
+* **Allocazione Concatenata (Linked):** Ogni file è una lista concatenata di blocchi sparsi nel disco; ogni blocco contiene un puntatore al successivo. *Pro:* Nessuna frammentazione esterna, facile far crescere il file. *Contro:* Accesso diretto pessimo (bisogna leggere i blocchi uno a uno), overhead di memoria per i puntatori, scarsa affidabilità.
+* **Allocazione Indicizzata:** Tutti i puntatori ai blocchi di un file vengono riuniti in un solo blocco speciale (blocco indice o *inode*). *Pro:* Ottimo per l'accesso diretto, nessuna frammentazione esterna. *Contro:* Overhead per mantenere in memoria il blocco indice, complicato per file immensi (richiede indici a più livelli).
