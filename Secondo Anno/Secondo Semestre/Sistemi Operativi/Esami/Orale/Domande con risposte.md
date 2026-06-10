@@ -153,3 +153,54 @@ Sono i metodi in cui il SO alloca i blocchi su disco ai file:
 * **Allocazione Contigua:** Il file occupa una sequenza ininterrotta di blocchi sul disco. *Pro:* Lette/scritture sequenziali e dirette velocissime. *Contro:* Frammentazione esterna, difficile prevedere quanto far crescere un file.
 * **Allocazione Concatenata (Linked):** Ogni file è una lista concatenata di blocchi sparsi nel disco; ogni blocco contiene un puntatore al successivo. *Pro:* Nessuna frammentazione esterna, facile far crescere il file. *Contro:* Accesso diretto pessimo (bisogna leggere i blocchi uno a uno), overhead di memoria per i puntatori, scarsa affidabilità.
 * **Allocazione Indicizzata:** Tutti i puntatori ai blocchi di un file vengono riuniti in un solo blocco speciale (blocco indice o *inode*). *Pro:* Ottimo per l'accesso diretto, nessuna frammentazione esterna. *Contro:* Overhead per mantenere in memoria il blocco indice, complicato per file immensi (richiede indici a più livelli).
+
+**38. Differenza tra System Call e normale chiamata a funzione (e Dual Mode)**
+Una system call è la richiesta di un servizio al sistema operativo da parte di un processo utente. A differenza di una normale chiamata a funzione che avviene nello spazio di indirizzamento dell'utente, la system call innesca una *trap* (eccezione software) che fa passare la CPU dalla modalità utente (User Mode) alla modalità supervisore (Kernel Mode). Questo garantisce che solo il kernel possa eseguire operazioni privilegiate (come l'accesso all'hardware o alla memoria di altri processi), isolando e proteggendo il sistema da codice malevolo o buggato.
+
+**39. Cos'è il Process Control Block (PCB) e cosa contiene?**
+Il PCB è una struttura dati mantenuta dal sistema operativo per ogni processo in esecuzione. Funge da "carta d'identità" del processo e contiene tutte le informazioni necessarie per il suo ripristino dopo un context switch. Include: stato del processo, Program Counter (la prossima istruzione da eseguire), contenuto dei registri della CPU, informazioni di scheduling (es. priorità), limiti di memoria (es. puntatori alla tabella delle pagine) e stato delle risorse I/O (es. la tabella dei file aperti).
+
+**40. Stati di un processo e transizioni principali**
+Un processo attraversa tipicamente cinque stati: *New* (appena creato), *Ready* (pronto in coda, aspetta la CPU), *Running* (in esecuzione sulla CPU), *Waiting/Blocked* (sospeso in attesa di un evento, come il completamento di un I/O) e *Terminated*. La transizione da *Running* a *Ready* avviene per prelazione (scade il time-slice). Da *Running* a *Waiting* avviene se il processo richiede un'operazione lenta. Da *Waiting* a *Ready* avviene quando l'operazione attesa è completata.
+
+**41. Problema della Sezione Critica e requisiti per la sua soluzione**
+La sezione critica è una porzione di codice in cui un processo accede a dati condivisi (memoria, file) con altri processi. Per evitare incoerenze (*race conditions*), una soluzione valida deve soddisfare tre requisiti: 
+1) **Mutua Esclusione:** se un processo è nella sezione critica, nessun altro può entrarvi.
+2) **Progresso:** se nessuno è nella sezione critica e ci sono richieste, la scelta su chi entra non può essere rimandata all'infinito.
+3) **Attesa Limitata:** ci deve essere un limite al numero di volte che altri processi possono entrare prima che tocchi a un processo in attesa (evitando la *starvation*).
+
+**42. Semafori vs Mutex: qual è la differenza?**
+Il *Mutex* (Mutual Exclusion) è un lucchetto binario legato alla "proprietà": solo il thread che lo ha acquisito (bloccato) ha il diritto di sbloccarlo. Serve esclusivamente a proteggere le sezioni critiche.
+Il *Semaforo* è un contatore intero gestito dal sistema operativo. Può essere incrementato (Signal) da un thread completamente diverso da quello che lo ha decrementato (Wait). Questa flessibilità lo rende ideale per la **sincronizzazione logica** tra processi (es. segnalare a un consumatore che un produttore ha inserito un dato in un buffer).
+
+**43. Algoritmo del Banchiere (Deadlock Avoidance)**
+Mentre la "prevenzione" del deadlock invalida a priori una delle 4 condizioni necessarie, l'"evitamento" (Avoidance) analizza dinamicamente ogni singola richiesta di risorse in tempo reale. L'Algoritmo del Banchiere valuta la richiesta simulandone l'accettazione: se l'assegnazione mantiene il sistema in uno "Stato Sicuro" (ovvero esiste almeno una sequenza garantita che permette a tutti i processi di terminare con le risorse rimanenti), la richiesta viene accettata. Altrimenti, il processo viene messo in attesa.
+
+**44. Anomalie nella sostituzione delle pagine (Anomalia di Belady)**
+Logicamente, aumentando il numero di frame fisici (RAM) a disposizione di un processo, il numero di page fault dovrebbe diminuire. Tuttavia, con l'algoritmo di rimpiazzo **FIFO** (First-In, First-Out), può verificarsi l'Anomalia di Belady: per specifiche sequenze di accesso, aumentare la memoria causa paradossalmente un *aumento* del numero di page fault. Algoritmi basati sullo storico degli utilizzi (come LRU) sono immuni a questa anomalia.
+
+**45. Cos'è il Thrashing e come si previene?**
+Il *Thrashing* è un collasso totale delle prestazioni in cui il sistema spende quasi tutto il tempo a fare swapping di pagine tra disco e RAM (page-in e page-out) anziché eseguire istruzioni utili. Avviene quando ci sono troppi processi attivi e nessuno ha abbastanza RAM per contenere le pagine essenziali. Si previene con il **Modello del Working Set**, che stima quante pagine un processo sta attivamente usando; se la somma dei *working set* di tutti i processi supera la memoria disponibile, il SO sospende (swappa interamente) uno o più processi per ridare respiro al sistema.
+
+**46. Cos'è il Copy-on-Write (COW)?**
+È un'ottimizzazione fondamentale della system call `fork()`. Invece di duplicare immediatamente tutta la memoria del processo padre per creare il figlio (operazione lentissima), il SO mappa le stesse pagine fisiche per entrambi i processi, marcandole in "sola lettura". Solo nel momento in cui uno dei due processi tenta di *scrivere* (modificare) un dato, l'hardware genera un'eccezione e il SO interviene creando una copia isolata di quella singola pagina fisica.
+
+**47. Allocazione della memoria per il Kernel (Buddy System e Slab Allocator)**
+A differenza dei processi utente che usano la paginazione, il kernel necessita spesso di blocchi di memoria strettamente contigui e veloci.
+* **Buddy System:** Divide la memoria a metà in modo ricorsivo creando blocchi "gemelli" (buddy) di dimensioni potenza di 2. È veloce nell'unire blocchi adiacenti quando vengono liberati, riducendo la frammentazione esterna.
+* **Slab Allocator:** Lavora sopra il Buddy System. Pre-alloca "cache" di oggetti di dimensione fissa molto usati dal kernel (es. PCB o inode). Elimina la frammentazione interna ed evita di creare e distruggere continuamente le stesse strutture dati.
+
+**48. Livelli RAID principali (0, 1, 5) e i loro scopi**
+Il RAID aggrega più dischi fisici.
+* **RAID 0 (Striping):** Distribuisce i dati in parallelo sui dischi. Massime prestazioni, ma se si rompe un disco si perde tutto (nessuna ridondanza).
+* **RAID 1 (Mirroring):** Clona gli stessi dati su due dischi. Affidabilità massima (tolleranza al guasto totale di un disco), ma si dimezza lo spazio utile disponibile.
+* **RAID 5 (Striping + Parità):** Distribuisce i dati e i blocchi di "parità" su minimo 3 dischi. Ottimo compromesso: tollera la rottura di un disco (i dati mancanti vengono calcolati tramite la parità) sacrificando lo spazio equivalente di un solo disco.
+
+**49. I-node in UNIX (Indice a più livelli)**
+Nel file system ext (UNIX/Linux), l'allocazione indicizzata si basa sull'inode, una struttura dati che contiene i metadati del file e i puntatori ai blocchi dati. Per supportare sia file minuscoli che enormi, utilizza un albero sbilanciato: contiene alcuni *puntatori diretti* (per accedere velocemente a file piccoli), un *puntatore indiretto singolo* (che punta a un blocco pieno di puntatori), uno *doppio indiretto* e uno *triplo indiretto*. Questo garantisce un overhead minimo per i file piccoli e grande scalabilità per i database.
+
+**50. Costo del Context Switch (Cambio di Contesto)**
+Il Context Switch è puro overhead. I costi diretti derivano dal salvataggio e caricamento dei registri della CPU da e verso i PCB in memoria. Il costo "nascosto" e più pesante deriva dal **decadimento della cache**: i dati, le istruzioni e le voci nella TLB appartengono al processo precedente. Quando il nuovo processo prende il controllo, troverà le cache inutili, subendo numerosi miss iniziali e rallentando drasticamente l'esecuzione nei primissimi cicli.
+
+**51. Direct Memory Access (DMA): cos'è e perché si usa?**
+Se la CPU dovesse gestire manualmente il trasferimento di un grosso file dal disco alla RAM, verrebbe interrotta per ogni singolo byte scambiato. Il DMA è un chip hardware specializzato a cui la CPU delega il trasferimento dati massivo. La CPU indica al DMA l'indirizzo di partenza, l'indirizzo di destinazione e la quantità di byte da spostare. Il DMA fa tutto il lavoro in autonomia sul bus di sistema e manda un *singolo* interrupt alla CPU solo a trasferimento totalmente concluso, lasciando la CPU libera di eseguire altri processi nel frattempo.
