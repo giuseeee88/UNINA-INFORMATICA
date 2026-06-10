@@ -35,4 +35,17 @@
 35. Problema della frammntazione interna nello specifico
 36. strutture dati utilizzate nel kernel file system e definizione di quest'ultimo
 37. memorizzazione dei file su disco e (continua,indicizzata,concatenata)
-
+38. Differenza tra System Call e normale chiamata a funzione (e Dual Mode)
+39. Cos'è il Process Control Block (PCB) e cosa contiene?
+40. Stati di un processo e transizioni principali
+41. Problema della Sezione Critica e requisiti per la sua soluzione
+42. Semafori vs Mutex: qual è la differenza?
+43. Algoritmo del Banchiere (Deadlock Avoidance)
+44. Anomalie nella sostituzione delle pagine (Anomalia di Belady)
+45. Cos'è il Thrashing e come si previene?
+46. Cos'è il Copy-on-Write (COW)?
+47. Allocazione della memoria per il Kernel (Buddy System e Slab Allocator)
+48. Livelli RAID principali (0, 1, 5) e i loro scopi
+49. I-node in UNIX (Indice a più livelli)
+50. Costo del Context Switch (Cambio di Contesto)
+51. Direct Memory Access (DMA): cos'è e perché si usa?
