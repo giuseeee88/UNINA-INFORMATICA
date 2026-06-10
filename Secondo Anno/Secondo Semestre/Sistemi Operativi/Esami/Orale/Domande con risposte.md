@@ -204,3 +204,37 @@ Il Context Switch è puro overhead. I costi diretti derivano dal salvataggio e c
 
 **51. Direct Memory Access (DMA): cos'è e perché si usa?**
 Se la CPU dovesse gestire manualmente il trasferimento di un grosso file dal disco alla RAM, verrebbe interrotta per ogni singolo byte scambiato. Il DMA è un chip hardware specializzato a cui la CPU delega il trasferimento dati massivo. La CPU indica al DMA l'indirizzo di partenza, l'indirizzo di destinazione e la quantità di byte da spostare. Il DMA fa tutto il lavoro in autonomia sul bus di sistema e manda un *singolo* interrupt alla CPU solo a trasferimento totalmente concluso, lasciando la CPU libera di eseguire altri processi nel frattempo.
+
+**52. Problemi classici della sincronizzazione (es. Produttore-Consumatore o Lettori-Scrittori)**
+* **Produttore-Consumatore:** Uno o più processi produttori inseriscono dati in un buffer condiviso di dimensione limitata, mentre uno o più consumatori li prelevano. Richiede l'uso di semafori sia per garantire la mutua esclusione nell'accesso al buffer, sia per coordinare il conteggio degli slot vuoti e pieni, evitando che il produttore scriva se il buffer è pieno o che il consumatore legga se è vuoto.
+* **Lettori-Scrittori:** Più processi concorrenti devono accedere a una risorsa comune (es. un database). I lettori possono accedere contemporaneamente poiché non modificano i dati, mentre gli scrittori richiedono un accesso esclusivo. La sincronizzazione serve a gestire la precedenza (priorità ai lettori o agli scrittori) evitando corruzioni dei dati o situazioni di starvation.
+
+**53. Completely Fair Scheduler (CFS) in Linux**
+Il CFS è lo scheduler di default di Linux per i processi standard. A differenza degli algoritmi tradizionali basati su quanti di tempo fissi e code a priorità statica, il CFS alloca il tempo di CPU basandosi su un modello matematico di "CPU ideale multifunzionale". Tiene traccia del tempo speso in esecuzione da ogni thread attraverso una variabile chiamata *Virtual Runtime* (vruntime). Lo scheduler seleziona sempre il processo con il vruntime più basso. I processi con priorità più alta (valori di *nice* più bassi) vedono il loro vruntime crescere più lentamente, ottenendo così più tempo di calcolo reale.
+
+**54. Virtual File System (VFS)**
+Il VFS è un livello di astrazione software implementato all'interno del kernel del sistema operativo. Il suo scopo è separare le chiamate di sistema generiche relative ai file (come `open()`, `read()`, `write()`) dalle implementazioni fisiche e specifiche dei singoli file system (come ext4, FAT32, NTFS o file system di rete). In questo modo, i programmi utente possono interagire con qualsiasi dispositivo di memorizzazione usando un'unica interfaccia standardizzata (API), lasciando al VFS il compito di tradurre i comandi per il driver specifico.
+
+**55. Differenza tra Hard Link e Soft (Symbolic) Link**
+* **Hard Link:** È una voce di directory che associa un nome direttamente a un *inode* esistente sul disco. Di fatto, crea un alias per lo stesso identico file fisico. Il file viene rimosso dal disco solo quando l'ultimo hard link ad esso associato viene cancellato (il contatore dei riferimenti scende a zero). Non può collegare file su file system o partizioni differenti.
+* **Soft Link (Symlink):** È un file speciale a sé stante, dotato di un proprio inode, il cui contenuto è semplicemente una stringa di testo che rappresenta il percorso (path) verso il file di destinazione. Se il file originale viene rimosso, il soft link rimane ma diventa un puntatore rotto (*dangling pointer*). Può superare i confini di file system e partizioni diverse.
+
+**56. Cos'è un processo Zombie e qual è il ruolo della wait()?**
+Un processo viene definito *Zombie* quando ha terminato la sua esecuzione (ha invocato esplicitamente o implicitamente la system call `exit()`), ma la sua entry all'interno della tabella dei processi (nel PCB) è ancora mantenuta dal kernel. Questo accade perché il sistema operativo deve preservare lo stato di uscita del processo finché il processo "padre" non esegue una chiamata a `wait()`. Solo dopo che il padre ha letto tale stato, lo zombie viene definitivamente rimosso dalla memoria. Se il padre muore senza chiamare la `wait()`, i figli zombie vengono adottati dal processo `init` (o `systemd`), che provvede a ripulirli.
+
+**57. Differenza tra comunicazione Interprocesso (IPC) e comunicazione tra Thread**
+I processi sono isolati per motivi di sicurezza; pertanto, per scambiarsi dati devono ricorrere a meccanismi di *Inter-Process Communication* (IPC) gestiti dal kernel (come pipe, message passing o shared memory), i quali introducono un certo overhead. I thread dello stesso processo, invece, condividono lo stesso spazio di indirizzamento (memoria globale, heap). Poscono quindi comunicare in modo quasi istantaneo leggendo e scrivendo sulle stesse variabili. Tuttavia, proprio a causa della memoria condivisa, richiedono una sincronizzazione estremamente rigorosa (tramite mutex o semafori) per evitare race conditions.
+
+**58. Cos'è il Livelock e in cosa si differenzia dal Deadlock?**
+Entrambi sono fallimenti della proprietà di *liveness* (progresso), ma con dinamiche diverse:
+* **Deadlock (Stallo):** I processi coinvolti sono in uno stato di attesa asincrona, completamente bloccati. Non consumano cicli di CPU perché aspettano una risorsa che non verrà mai rilasciata.
+* **Livelock:** I processi sono attivi e continuano a eseguire istruzioni sulla CPU, ma cambiano continuamente il proprio stato interno in risposta alle azioni dell'altro. Si genera un ciclo infinito e improduttivo che non permette a nessun processo di fare reali progressi (l'analogia tipica è quella di due persone in un corridoio che provano a schivarsi spostandosi continuamente e sincronizzatamente sullo stesso lato).
+
+**59. Funzionamento hardware degli SSD: memorie Flash NAND e Wear Leveling**
+A differenza degli HDD in cui il ritardo è meccanico (seek time), gli SSD si basano su chip a stato solido (Flash NAND). Gli SSD hanno una limitazione strutturale: non possono sovrascrivere direttamente una cella di memoria, ma devono prima cancellare l'intero "blocco" che la contiene prima di poter riscrivere una "pagina". Inoltre, le celle si usurano fisicamente dopo un certo numero di cicli di cancellazione. Per ovviare a ciò, il controller del disco (tramite il Flash Translation Layer - FTL) implementa l'algoritmo di **Wear Leveling**, che rimappa costantemente gli indirizzi logici su quelli fisici per distribuire le scritture in modo uniforme su tutto il disco, evitando la rottura prematura di singole aree.
+
+**60. Meccanismo della Open File Table: perché il SO usa due tabelle distinte?**
+Quando un processo esegue la system call `open()`, il sistema operativo non si limita a cercare il file su disco, ma indicizza l'accesso attraverso due strutture dati in memoria:
+1) **Tabella dei file aperti di sistema (System-wide):** È globale e contiene una copia dei metadati del file (FCB/inode) e un contatore dei riferimenti (per sapere quanti processi lo stanno usando).
+2) **Tabella dei file aperti per-processo:** È privata di ogni singolo processo. Contiene i puntatori alle righe della tabella di sistema e, soprattutto, traccia l'**offset di lettura/scrittura (file pointer)** corrente di *quel* processo. 
+Questa separazione permette a due processi distinti di leggere lo stesso identico file in RAM contemporaneamente, ma mantenendo posizioni di lettura (offset) separate e indipendenti.

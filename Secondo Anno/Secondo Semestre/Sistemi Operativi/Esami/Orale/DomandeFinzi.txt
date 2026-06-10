@@ -49,3 +49,12 @@
 49. I-node in UNIX (Indice a più livelli)
 50. Costo del Context Switch (Cambio di Contesto)
 51. Direct Memory Access (DMA): cos'è e perché si usa?
+52. Problemi classici della sincronizzazione (es. Produttore-Consumatore o Lettori-Scrittori)
+53. Completely Fair Scheduler (CFS) in Linux
+54. Virtual File System (VFS)
+55. Differenza tra Hard Link e Soft (Symbolic) Link
+56. Cos'è un processo Zombie e qual è il ruolo della wait()?
+57. Differenza tra comunicazione Interprocesso (IPC) e comunicazione tra Thread
+58. Cos'è il Livelock e in cosa si differenzia dal Deadlock?
+59. Funzionamento hardware degli SSD: memorie Flash NAND e Wear Leveling
+60. Meccanismo della Open File Table: perché il SO usa due tabelle distinte?
