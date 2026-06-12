@@ -1,0 +1,5 @@
+********* SOLUTION
+********* Mode: out_copia
+********* Scoping: static
+Compile time error:
+Illegal usage x>2 of out_copia parameter x of p3

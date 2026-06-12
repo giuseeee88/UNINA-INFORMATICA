@@ -1,0 +1,5 @@
+********* SOLUTION
+********* Mode: out_rif
+********* Scoping: dynamic
+Compile time error:
+Illegal usage s=r of out_rif parameter r of p4

@@ -1,0 +1,57 @@
+
+
+x= *y;     sx : env(x)   dx: mem(mem(env(y))
+
+*y=x;     mem(env(y))    mem(env(x))
+
+
+x=y+1  env(x)  mem(env(y))+1
+
+
+x=*y+1   env(x) = mem(mem(env(y))+1
+
+
+x=*(y+1)  env(x) =mem(mem(env(y))+1)
+
+int y[10]   
+
+x=*(y+1)     env(x) = mem(env(y)+1
+
+x=y[2]  env(x) = mem(env(y)+2)
+
+y[2]=x   env(y)+2 =mem(env(x))
+
+*(y+2) = x  env(y)+2) = mem(env(x))        
+
+int **y;  
+
+x=**y ;    env(x) = mem(mem(mem(env(y)))
+
+**y=x     mem(mem(env(y))= mem(env(x))
+
+x=&y     env(x) = env(y)
+
+&y=x NO ! 
+
+
+
+
+
+
+ALTRI ESERCIZI MEM ED ENV
+
+
+x = y[3]      env(x) = mem(env(y)+3)
+
+
+Sx env(x)+3    Dx mem(mem(env(y)+1))                  x[3] = *y[1]
+
+
+x = y[2]   env(x) = mem(env(y)+2) 
+
+x= *(z+i)  env(x) = mem(mem(env(z))+mem(env(i)));
+
+
+*(x+1) = *y      mem(env(x))+1 = mem(mem(env(y)))
+*(x+1) = &y      mem(env(x))+1 = env(y)
+*(x[1]) = y[0]    mem(env(x)+1) = mem(env(y)+0)

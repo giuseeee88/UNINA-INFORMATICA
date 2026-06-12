@@ -1,0 +1,1 @@
+param_x([1-2,2-3,3-4],[var([],[x,y,z,t],[]),var([z],[t],[x,y]),var([z],[t],[x,y]),var([x],[z,y],[t])],[[],[any],[in_out_rif],[in_out_rif]],[[x=1,y=0,z=4,t=0,call(2,[t]),write(x,y,z,t)],[t=y,if(x<6,z=x*2,z=t+3),x=4,y=t-3,call(3,[z]),write(x,y,z,t)],[t=z,z=t*4,x=4,y=z*1,call(4,[z]),write(x,y,z,t)],[if(t<50,z=2,z=1),y=3,x=x,t=z-4,write(x,y,z,t)]]).

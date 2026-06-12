@@ -1,0 +1,5 @@
+********* SOLUTION
+********* Mode: in_rif
+********* Scoping: static
+Compile time error:
+Illegal assignment z=x*2 to IN/ref parameter of p2

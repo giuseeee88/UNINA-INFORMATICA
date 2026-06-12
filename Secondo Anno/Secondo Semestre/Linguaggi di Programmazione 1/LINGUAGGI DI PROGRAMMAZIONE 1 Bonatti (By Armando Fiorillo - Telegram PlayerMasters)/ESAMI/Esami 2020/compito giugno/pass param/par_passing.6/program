@@ -1,0 +1,43 @@
+program p1
+int x; int y; int z; int t; 
+     procedure p2([MODE] int z)
+     int t; 
+          procedure p3([IN OUT x rif] int z)
+          int t; 
+               procedure p4([IN OUT x rif] int x)
+               int z; int y; 
+               BEGIN
+               if t<50 then z=2 else z=1;
+               y=3;
+               x=x;
+               t=z-4;
+               write(x,y,z,t);
+               END
+
+          BEGIN
+          t=z;
+          z=t*4;
+          x=4;
+          y=z*1;
+          p4(z);
+          write(x,y,z,t);
+          END
+
+     BEGIN
+     t=y;
+     if x<6 then z=x*2 else z=t+3;
+     x=4;
+     y=t-3;
+     p3(z);
+     write(x,y,z,t);
+     END
+
+BEGIN
+x=1;
+y=0;
+z=4;
+t=0;
+p2(t);
+write(x,y,z,t);
+END
+

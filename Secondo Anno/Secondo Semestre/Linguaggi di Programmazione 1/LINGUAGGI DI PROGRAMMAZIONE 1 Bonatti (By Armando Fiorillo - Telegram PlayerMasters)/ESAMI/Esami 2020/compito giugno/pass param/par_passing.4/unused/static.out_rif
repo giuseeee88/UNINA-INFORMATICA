@@ -1,0 +1,40 @@
+********* SOLUTION
+********* Mode: out_rif
+********* Scoping: static
+
+     call p1[]     
+          q=0 ->	q:p1 = 0
+          r=2 ->	r:p1 = 2
+          s=1 ->	s:p1 = 1
+          t=2 ->	t:p1 = 2
+     call p2[q,s]     out_rif t <- q; in_out_copia q <- s; 
+          r=2 ->	r:p2 = 2
+          t=4 ->	t:p2 = q:p1 = 4
+          q=3 ->	q:p2 = 3
+          s=r+3 ->	s:p1 = 5
+     call p3[t]     in_out_copia t <- t; 
+          r=q*2 ->	r:p3 = 8
+          t=q ->	t:p3 = 4
+          q=s ->	t:p2 = q:p1 = 5
+          s=r-4 ->	s:p1 = 4
+     call p4[r,s]     in_out_copia t <- r; in_out_rif s <- s; 
+          q=t+2 ->	q:p4 = 10
+          t=1 ->	t:p4 = 1
+          s=q ->	s:p4 = s:p1 = 10
+          r=q ->	r:p3 = 10
+          write[q,r,s,t]
+10 10 10 1 
+     leaving p4, back to p3
+               copy t back -> r:p3 = 1
+          write[q,r,s,t]
+5 1 10 4 
+     leaving p3, back to p2
+               copy t back -> t:p2 = q:p1 = 4
+          write[q,r,s,t]
+3 2 10 4 
+     leaving p2, back to p1
+               copy q back -> s:p1 = 3
+          write[q,r,s,t]
+4 2 3 2 
+     leaving p1
+

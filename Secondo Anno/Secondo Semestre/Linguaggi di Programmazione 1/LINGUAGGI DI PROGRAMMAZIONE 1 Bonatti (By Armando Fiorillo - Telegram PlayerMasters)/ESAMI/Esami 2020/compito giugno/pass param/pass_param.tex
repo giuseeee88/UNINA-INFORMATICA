@@ -1,0 +1,499 @@
+\documentclass{article}
+\begin{document}
+\small
+\noindent
+{\bf Passaggio parametri versione n. 1}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = IN OUT per copia
+\item Scoping statico, MODE = IN per riferimento
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int a; int b; int c; int d; 
+     procedure p2([IN x copia] int c)
+     int b; int d; 
+     BEGIN
+     b=1;
+     d=c+4;
+     c=2;
+     a=c-2;
+     write(a,b,c,d);
+     END
+
+     procedure p3([IN OUT x rif] int d)
+     int a; int b; 
+          procedure p4([MODE] int d)
+          int a; 
+          BEGIN
+          a=d;
+          d=4;
+          b=d*1;
+          c=4;
+          p2(a);
+          write(a,b,c,d);
+          END
+
+     BEGIN
+     a=c;
+     b=1;
+     d=4;
+     c=a*3;
+     p4(a);
+     write(a,b,c,d);
+     END
+
+BEGIN
+a=3;
+b=3;
+c=3;
+d=0;
+p3(d);
+write(a,b,c,d);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 2}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = IN OUT per copia
+\item Scoping statico, MODE = IN per riferimento
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int x; int y; int z; int t; 
+     procedure p2([IN OUT x rif] int y,[IN OUT x copia] int t)
+     int x; 
+     BEGIN
+     x=4;
+     y=y-1;
+     t=t;
+     z=4;
+     p4(x, y);
+     write(x,y,z,t);
+     END
+
+     procedure p3([IN OUT x copia] int z,[MODE] int x)
+     int y; 
+     BEGIN
+     y=1;
+     z=x;
+     if x>2 then x=t else x=1;
+     t=3;
+     write(x,y,z,t);
+     END
+
+     procedure p4([IN OUT x rif] int t,[IN OUT x copia] int z)
+     int x; 
+     BEGIN
+     x=1;
+     t=2;
+     z=3;
+     y=z;
+     p3(x, y);
+     write(x,y,z,t);
+     END
+
+BEGIN
+x=0;
+y=3;
+z=1;
+t=1;
+p2(y, x);
+write(x,y,z,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 3}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = OUT per copia
+\item Scoping statico, MODE = IN OUT per copia
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int q; int r; int s; int t; 
+     procedure p2([IN OUT x copia] int t,[IN OUT x rif] int q)
+     int s; 
+          procedure p3([IN OUT x rif] int q,[IN x copia] int t)
+          int r; 
+          BEGIN
+          r=t;
+          q=1;
+          t=s-3;
+          s=1;
+          write(q,r,s,t);
+          END
+
+          procedure p4([MODE] int t)
+          int s; 
+          BEGIN
+          s=t*3;
+          t=t-2;
+          r=3;
+          q=2;
+          p3(r, q);
+          write(q,r,s,t);
+          END
+
+     BEGIN
+     if t=8 then s=3 else s=3;
+     if s<1 then t=s+1 else t=3;
+     if t>3 then q=q else q=3;
+     r=r-2;
+     p4(t);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=0;
+r=0;
+s=4;
+t=2;
+p2(s, r);
+write(q,r,s,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 4}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = IN per riferimento
+\item Scoping statico, MODE = OUT per copia
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int q; int r; int s; int t; 
+     procedure p2([MODE] int t,[IN OUT x copia] int q)
+     int r; 
+     BEGIN
+     r=2;
+     if r=8 then t=q else t=4;
+     q=3;
+     s=r+3;
+     p3(t);
+     write(q,r,s,t);
+     END
+
+     procedure p3([IN OUT x copia] int t)
+     int r; 
+          procedure p4([IN OUT x copia] int t,[IN OUT x rif] int s)
+          int q; 
+          BEGIN
+          q=t+2;
+          t=1;
+          s=q;
+          r=q;
+          write(q,r,s,t);
+          END
+
+     BEGIN
+     r=q*2;
+     t=q;
+     if s>6 then q=q else q=s;
+     s=r-4;
+     p4(r, s);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=0;
+r=2;
+s=1;
+t=2;
+p2(q, s);
+write(q,r,s,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 5}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = OUT per copia
+\item Scoping statico, MODE = IN OUT per copia
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int q; int r; int s; int t; 
+     procedure p2([IN OUT x copia] int t)
+     int s; 
+     BEGIN
+     s=r*2;
+     if r=4 then t=r else t=r;
+     q=q+4;
+     r=4;
+     p4(q, r);
+     write(q,r,s,t);
+     END
+
+     procedure p3([IN OUT x rif] int q,[IN OUT x rif] int t)
+     int r; 
+     BEGIN
+     r=2;
+     q=2;
+     t=s;
+     if s=10 then s=s-1 else s=r;
+     write(q,r,s,t);
+     END
+
+     procedure p4([MODE] int r,[IN x copia] int t)
+     int s; 
+     BEGIN
+     s=r;
+     r=s;
+     t=2;
+     q=3;
+     p3(r, t);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=2;
+r=3;
+s=1;
+t=1;
+p2(s);
+write(q,r,s,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 6}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = OUT per copia
+\item Scoping statico, MODE = IN per riferimento
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int x; int y; int z; int t; 
+     procedure p2([MODE] int z)
+     int t; 
+          procedure p3([IN OUT x rif] int z)
+          int t; 
+               procedure p4([IN OUT x rif] int x)
+               int z; int y; 
+               BEGIN
+               if t<50 then z=2 else z=1;
+               y=3;
+               x=x;
+               t=z-4;
+               write(x,y,z,t);
+               END
+
+          BEGIN
+          t=z;
+          z=t*4;
+          x=4;
+          y=z*1;
+          p4(z);
+          write(x,y,z,t);
+          END
+
+     BEGIN
+     t=y;
+     if x<6 then z=x*2 else z=t+3;
+     x=4;
+     y=t-3;
+     p3(z);
+     write(x,y,z,t);
+     END
+
+BEGIN
+x=1;
+y=0;
+z=4;
+t=0;
+p2(t);
+write(x,y,z,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 7}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = IN per riferimento
+\item Scoping statico, MODE = OUT per copia
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int q; int r; int s; int t; 
+     procedure p2([IN OUT x rif] int s)
+     int r; int t; 
+     BEGIN
+     r=4;
+     t=2;
+     s=s*2;
+     q=s;
+     p3(s);
+     write(q,r,s,t);
+     END
+
+     procedure p3([IN OUT x copia] int r)
+     int t; 
+          procedure p4([MODE] int s)
+          int r; 
+          BEGIN
+          r=3;
+          s=2;
+          t=t+1;
+          q=3;
+          write(q,r,s,t);
+          END
+
+     BEGIN
+     t=s;
+     r=2;
+     if s>10 then q=t+2 else q=4;
+     s=t*4;
+     p4(t);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=3;
+r=4;
+s=0;
+t=1;
+p2(r);
+write(q,r,s,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 8}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = OUT per copia
+\item Scoping statico, MODE = IN OUT per copia
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int q; int r; int s; int t; 
+     procedure p2([IN x copia] int t)
+     int q; 
+          procedure p3([MODE] int s)
+          int q; 
+          BEGIN
+          q=1;
+          if s>5 then s=4 else s=1;
+          t=3;
+          if s>2 then r=t*4 else r=r;
+          p4(s, r);
+          write(q,r,s,t);
+          END
+
+          procedure p4([IN OUT x copia] int r,[IN OUT x copia] int s)
+          int t; 
+          BEGIN
+          t=s-1;
+          r=r;
+          if q<4 then s=s else s=q*1;
+          q=r;
+          write(q,r,s,t);
+          END
+
+     BEGIN
+     q=4;
+     t=s*2;
+     r=4;
+     if r=3 then s=1 else s=q+1;
+     p3(s);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=1;
+r=2;
+s=2;
+t=4;
+p2(r);
+write(q,r,s,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\noindent
+{\bf Passaggio parametri versione n. 9}\vspace*{-1pt}
+\begin{itemize}
+\item Scoping dinamico, MODE = IN per riferimento
+\item Scoping statico, MODE = OUT per copia
+\end{itemize}
+
+\begin{verbatim}
+program p1
+int q; int r; int s; int t; 
+     procedure p2([IN OUT x copia] int t)
+     int q; int s; 
+          procedure p3([IN OUT x copia] int s,[IN OUT x copia] int r)
+          int t; 
+          BEGIN
+          t=2;
+          s=1;
+          r=2;
+          q=1;
+          write(q,r,s,t);
+          END
+
+     BEGIN
+     q=t-4;
+     s=3;
+     t=3;
+     r=q;
+     p3(t, q);
+     write(q,r,s,t);
+     END
+
+     procedure p4([MODE] int r,[IN OUT x copia] int q)
+     int t; 
+     BEGIN
+     t=q+1;
+     r=2;
+     q=t;
+     s=t;
+     p2(s);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=4;
+r=0;
+s=1;
+t=2;
+p4(t, s);
+write(q,r,s,t);
+END
+
+
+\end{verbatim}
+\newpage
+
+\end{document}

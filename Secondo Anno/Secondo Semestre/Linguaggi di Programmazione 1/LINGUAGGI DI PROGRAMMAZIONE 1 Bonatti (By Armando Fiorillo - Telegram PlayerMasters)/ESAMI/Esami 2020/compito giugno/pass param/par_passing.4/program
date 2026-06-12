@@ -1,0 +1,43 @@
+program p1
+int q; int r; int s; int t; 
+     procedure p2([MODE] int t,[IN OUT x copia] int q)
+     int r; 
+     BEGIN
+     r=2;
+     if r=8 then t=q else t=4;
+     q=3;
+     s=r+3;
+     p3(t);
+     write(q,r,s,t);
+     END
+
+     procedure p3([IN OUT x copia] int t)
+     int r; 
+          procedure p4([IN OUT x copia] int t,[IN OUT x rif] int s)
+          int q; 
+          BEGIN
+          q=t+2;
+          t=1;
+          s=q;
+          r=q;
+          write(q,r,s,t);
+          END
+
+     BEGIN
+     r=q*2;
+     t=q;
+     if s>6 then q=q else q=s;
+     s=r-4;
+     p4(r, s);
+     write(q,r,s,t);
+     END
+
+BEGIN
+q=0;
+r=2;
+s=1;
+t=2;
+p2(q, s);
+write(q,r,s,t);
+END
+

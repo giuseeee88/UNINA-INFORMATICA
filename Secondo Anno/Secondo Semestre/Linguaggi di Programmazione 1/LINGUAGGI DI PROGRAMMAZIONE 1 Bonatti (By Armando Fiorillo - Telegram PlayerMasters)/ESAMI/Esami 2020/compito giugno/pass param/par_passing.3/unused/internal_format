@@ -1,0 +1,1 @@
+param_x([1-2,2-3,2-4],[var([],[q,r,s,t],[]),var([t,q],[s],[r]),var([q,t],[r],[s]),var([t],[s],[r,q])],[[],[in_out_copia,in_out_rif],[in_out_rif,in_copia],[any]],[[q=0,r=0,s=4,t=2,call(2,[s,r]),write(q,r,s,t)],[if(t=8,s=3,s=3),if(s<1,t=s+1,t=3),if(t>3,q=q,q=3),r=r-2,call(4,[t]),write(q,r,s,t)],[r=t,q=1,t=s-3,s=1,write(q,r,s,t)],[s=t*3,t=t-2,r=3,q=2,call(3,[r,q]),write(q,r,s,t)]]).

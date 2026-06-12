@@ -1,0 +1,5 @@
+********* SOLUTION
+********* Mode: in_rif
+********* Scoping: static
+Compile time error:
+Illegal assignment x=t to IN/ref parameter of p3

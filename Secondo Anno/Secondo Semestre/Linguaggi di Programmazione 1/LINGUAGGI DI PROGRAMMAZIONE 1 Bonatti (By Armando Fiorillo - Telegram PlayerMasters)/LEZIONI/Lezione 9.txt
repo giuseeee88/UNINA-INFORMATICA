@@ -1,0 +1,26 @@
+LP 03/04/2025
+* significa qualunque numero, es: più attributi 
+modifier= modificatore
+componente tra [] è opzionale
+| alternative, un tipo può essere: byte, short,etc..
+con albero parsing si può fare traduzione da java e bytecode
+java usa lo scoping statico e lo può alterare
+
+SORGENTE
+dichiarazione di pacchetto=contengono le classi dell'applicazione dividendole per responsabilità
+definizione di pacchetti importati=blocchi di classi importati
+dichiarazioni di classi di qualunque tipo
+quando compilo , anche se ci sono classi non pubbliche, ci accedo comunque con il .class
+se non è dichiarato un pacchetto, java nel pacchetto di default inserisce tutto ciò che non è esplicitamente dichiarato
+JAR (Java ARchive) = file compressi che fungono da archivio che contengono gli alberi dei package
+enunciato=singola istruzione
+
+prima di Unicode, con ASCII i caratteri erano codificati in numeri e c'erano le tabulazioni, rappresentati da 1 byte.
+Unicode nasce per coprire diverse lingue, ogni carattere corrisponde a 2 byte. Per i nomi delle classi bisogna usare caratteri ASCII e non Unicode (esempio, non posso usare caratteri cinesi)
+
+Java impone la programmazione strutturata, goto non lo supporta ed è una parola chiave riservata
+idem const, non possono essere usati come identificatori
+
+puntatori arbitrari sono quelli con new.
+
+In C e Java il passaggio di parametri è IN per copia, il passaggio per riferimento non è supportato in Java

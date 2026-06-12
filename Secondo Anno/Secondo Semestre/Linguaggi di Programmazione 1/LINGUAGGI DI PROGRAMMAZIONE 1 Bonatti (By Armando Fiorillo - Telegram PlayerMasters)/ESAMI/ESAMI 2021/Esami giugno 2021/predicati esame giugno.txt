@@ -1,0 +1,92 @@
+%	-- online_exam_20210630 - Esercizio 9 --	%
+
+%	Versione 1 - Calcolare lista di elementi interi positivi
+positivo([], []).
+positivo([T|C1], [T|C2] )	:- positivo(C1, C2), T >= 0.
+positivo([T|C1],C2) 		:- positivo(C1, C2), T < 0.
+
+
+%	Versione 2, 9 - Decrementare tutti gli elementi interi di una lista
+decrementa([], []).
+decrementa([X|C1], [Y|C2]) :- decrementa(C1, C2), Y is X-1.
+
+
+%	Versione 3, 4, 19 - Calcolare minimo di una lista di interi
+minimo([], Min, Min).
+minimo([X|C1], Min, min(X, Min0)) 	:- minimo(C1, Min, Min0).
+minimo_lista([X|C1], Min) 			:- minimo(C1, X, Y), Min is Y.
+
+
+%	Versione 5, 12, 16 - Calcolare prodotto di elementi interi di una lista
+prodotto([], 1).
+prodotto([X|C1], Y) :- prodotto(C1, T), Y is X * T.
+
+
+%	Versione 6, 26, 28 - Trovare i-esimo elemento di una lista
+iEsimo([X|_], I, X) :- I is 0.
+iEsimo([_|C], I, Y) :- not(I is 0), J is I - 1, iEsimo(C, J, Y).
+
+
+%	Versione 7, 14, 21, 27 - Calcolare lista di elementi interi divisibili per 3
+divPer3([], []).
+divPer3([X|C1], [X|C2]) :- divPer3(C1, C2), 0 is X mod 3.
+divPer3([X|C1], C2) 	:- divPer3(C1, C2), not(0 is X mod 3).
+
+
+%	Versione 8, 17 - Calcolare lista di elementi interi dispari
+dispari([], []).
+dispari([X|C1], [X|C2]) :- dispari(C1, C2), not(0 is X mod 2).
+dispari([X|C1], C2) 	:- dispari(C1, C2), 0 is X mod 2.
+
+
+%	Versione 10, 13, 29 - Calcolare lista di elementi interi positivi
+negativo([], []).
+negativo([T|C1], [T|C2]) 	:- negativo(C1, C2), T < 0.
+negativo([T|C1], C2) 		:- negativo(C1, C2), T >= 0.
+
+
+%	Versione 11 - Calcolare quante volte compare un elemento in una lista
+conta([], _, 0).
+conta([X|C], T, Y) :- conta(C, T, A), T = X, Y is A + 1.
+conta([X|C], T, Y) :- conta(C, T, A), not(T = X), Y is A.
+
+
+%	Versione 15 - Incrementare tutti gli elementi interi di una lista
+incrementa([], []).
+incrementa([X|C1], [Y|C2]) :- incrementa(C1, C2), Y is X+1.
+
+
+%	Versione 18 - Calcolare somma di elementi interi di una lista
+somma([], 0).
+somma([X|C1], Y) :- somma(C1, T), Y is X + T.
+
+
+%	Versione 20 - Calcolare lista di elementi interi pari
+pari([], []).
+pari([X|C1], [X|C2]) 	:- pari(C1, C2), 0 is X mod 2.
+pari([X|C1], C2) 		:- pari(C1, C2), not(0 is X mod 2).
+
+
+%	Versione 22 - Calcolare l'inversa di una lista
+%	il predicato 'concatena' è il predicato 'append' di Prolog
+concatena([], L1, L1).
+concatena(L1, [], L1).
+concatena([X|C1], L, [X|C2]) :- concatena(C1, L, C2).
+inversa([], []).
+inversa([X|C1], Y) :- inversa(C1, C2), concatena(C2, [X], Y).
+
+
+%	Versione 23 - Calcolare la media degli elementi di una lista
+media([], 0, 0, 0).
+media([X|C1], S, L, Y) :- media(C1, T, M, _), S is T + X, L is M + 1, Y is S / L.
+
+
+%	Versione 24 - Dividere tutti gli elementi di una lista per la sua lunghezza
+%	DA COMPLETARE
+divisioneLunghezza([], []).
+divisioneLunghezza([X|C1], [Y|C2]) :- divisioneLunghezza(C1, C2), lunghezza(C1, M), Y is X / (M + 1).
+
+
+%	Versione 25 - Calcolare la lunghezza di una lista
+lunghezza([], 0).
+lunghezza([_|C1], Y) :- lunghezza(C1, T), Y is T + 1.
