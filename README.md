@@ -26,38 +26,40 @@ Se vuoi avere tutto il materiale sul tuo computer e tenerlo sempre aggiornato co
 
 ### 1. Installazione (Solo la prima volta)
 
-Per scaricare e aggiornare automaticamente la cartella, devi installare un piccolo programma chiamato **Git**.
+Per scaricare e aggiornare automaticamente la cartella, devi installare un piccolo programma chiamato **Git**.  
 
 - **Windows**:
-  1. Scarica l'installer da [git-scm.com](https://git-scm.com/download/win).
-  2. Avvia il file `.exe` scaricato e clicca sempre su "Next" (le impostazioni predefinite vanno bene).
+  - **Metodo veloce (Terminale/PowerShell)**: Scrivi winget install -e --id Git.Git
+  - **Metodo classico**: Scarica l'installer da [git-scm.com](https://git-scm.com/download/win).
 - **macOS**:
-  1. Apri il **Terminale** (lo trovi nelle Applicazioni -> Utility).
-  2. Scrivi `git --version` e premi Invio. Se non è installato, apparirà un avviso che ti chiederà di installare i "Command Line Tools". Accetta e procedi.
+  - **Metodo veloce (Homebrew)**: Scrivi rew install git
+  - **Metodo classico**: Apri il Terminale, scrivi git --version e segui le istruzioni per installare i "Command Line Tools".
 - **Linux**:
-  1. Apri il terminale e scrivi:
-     - Ubuntu/Debian: `sudo apt install git`
-     - Fedora: `sudo dnf install git`
-     - Arch Linux: `sudo pacman -S git`
+  - Ubuntu/Debian: sudo apt install git
+  - Fedora: sudo dnf install git
+  - Arch Linux: sudo pacman -S git
+
+> **Nota per file grandi**: Questa repository utilizza **Git LFS** per gestire PDF e dispense pesanti. Dopo aver installato Git, scrivi nel terminale: git lfs install per assicurarti di scaricare correttamente tutti i file.
 
 ### 2. Scaricare la repository sul tuo PC (Clone)
 
-Una volta installato Git, scegli una cartella sul tuo computer dove vuoi salvare il materiale (es. Documenti).
+Una volta installato Git, scegli una cartella sul tuo computer dove vuoi salvare il materiale (es. Documenti).  
 
-1. Apri il terminale (su Windows si chiama **Git Bash**, cercalo nel menu Start).
+1. Apri il terminale (su Windows si chiama **Git Bash** o **PowerShell**).
 2. Scrivi il seguente comando e premi Invio:
-   ```bash
+   `ash
    git clone https://github.com/Carloj005/UNINA-INFORMATICA.git
-   ```
-3. Ora avrai una cartella chiamata `UNINA-INFORMATICA` con tutto il contenuto.
+   `
+3. Ora avrai una cartella chiamata UNINA-INFORMATICA con tutto il contenuto.
 
 ### 3. Aggiornare periodicamente il materiale (Pull)
 
-Quando vengono aggiunti nuovi appunti o modifiche su GitHub, non devi riscaricare tutto. Basta aggiornare la cartella che hai già:
+Quando vengono aggiunti nuovi appunti o modifiche su GitHub, basta aggiornare la cartella che hai già senza riscaricare tutto:
 
-1. Apri il terminale (o Git Bash) dentro la cartella `UNINA-INFORMATICA` (oppure aprilo normalmente e scrivi `cd UNINA-INFORMATICA`).
-2. Scrivi questo comando e premi Invio:
-   ```bash
+1. Apri il terminale dentro la cartella UNINA-INFORMATICA.
+2. Scrivi questi comandi:
+   `ash
+   git fetch origin
    git pull
-   ```
-3. Git scaricherà solo i file nuovi o modificati in pochi secondi. Consigliamo di farlo ogni volta che vuoi studiare per essere sicuro di avere l'ultima versione!
+   `
+3. Git scaricherà solo i file nuovi o modificati. Consigliamo di farlo ogni volta che vuoi studiare!
