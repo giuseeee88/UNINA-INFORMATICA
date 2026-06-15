@@ -24,20 +24,20 @@ Repository dedicata alla raccolta e organizzazione del materiale didattico per i
 | Semestre | Materia | Canale 1 | Canale 2 | Canale 3 | Stato |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | 1° | [Architettura Elaboratori](./Primo%20Anno/Primo%20Semestre/Architettura%20degli%20Elaboratori) | L. Sauro | S. Rossi | Da Definire | ✅ |
-| 1° | [Analisi Matematica I](./Primo%20Anno/Primo%20Semestre/Analisi%20Matematica%201) | R. Alicandro | D. Castorina | A.M. Barbagallo | ✅ |
+| 1° | [Analisi Matematica I](./Primo%20Anno/Primo%20Semestre/Analisi%20Matematica%201) | R. Alicandro/C. Leone | D. Castorina | A.M. Barbagallo | ✅ |
 | 1° | [Programmazione 1](./Primo%20Anno/Primo%20Semestre/Programmazione%201) | R. Prevete | D. Riccio/L. Sauro | F. Isgrò | ✅ |
-| 2° | [Algebra](./Primo%20Anno/Secondo%20Semestre/Algebra) | M.R. Celentani | G. Cutolo | M. Brescia | ✅ |
-| 2° | [Programmazione OO](./Primo%20Anno/Secondo%20Semestre/Programmazione%20Object%20Oriented) | S. Di Martino/M. Sangiovanni | P. Tramontana | B. Breve/R. Caccavale | ✅ |
-| 2° | [Basi di Dati](./Primo%20Anno/Secondo%20Semestre/Basi%20di%20Dati) | M. Sangiovanni | S. Barra | A. Calì | ✅ |
+| 2° | [Algebra](./Primo%20Anno/Secondo%20Semestre/Algebra) | M.R. Celentani | G. Cutolo | M. Brescia | ⏳ |
+| 2° | [Programmazione OO](./Primo%20Anno/Secondo%20Semestre/Programmazione%20Object%20Oriented) | S. Di Martino/M. Sangiovanni | P. Tramontana | B. Breve/R. Caccavale | ⏳ |
+| 2° | [Basi di Dati](./Primo%20Anno/Secondo%20Semestre/Basi%20di%20Dati) | M. Sangiovanni | S. Barra | A. Calì | ⏳ |
 
 ### 🟡 Secondo Anno (Canali: C1: A-G, C2: H-Z)
 
 | Semestre | Materia | Canale 1 | Canale 2 | Stato |
 | :--- | :--- | :--- | :--- | :---: |
 | 1° | [Algoritmi e Strutture Dati](./Secondo%20Anno/Primo%20Semestre/Algoritmi%20e%20Strutture%20Dati) | M. Benerecetti | F. Mogavero | ✅ |
-| 1° | [Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | A. De Luca | A. De Luca | ✅ |
+| 1° | [Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | A. De Luca | A. De Luca | ⏳ |
 | 1° | [Fisica Generale I](./Secondo%20Anno/Primo%20Semestre/Fisica%20Generale%201) | G. Chirco/G. De Rosa | G. Esposito | ✅ |
-| 1° | [Geometria](./Secondo%20Anno/Primo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ✅ |
+| 1° | [Geometria](./Secondo%20Anno/Primo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ⏳ |
 | 2° | [Sistemi Operativi](./Secondo%20Anno/Secondo%20Semestre/Sistemi%20Operativi) | A. Finzi | W. Balzano | ⏳ |
 | 2° | [Analisi e Progettazione Algoritmi](./Secondo%20Anno/Secondo%20Semestre/Analisi%20e%20Progettazione%20di%20Algoritmi) | M. Benerecetti | F. Mogavero | ⏳ |
 | 2° | [Linguaggi Programmazione 1](./Secondo%20Anno/Secondo%20Semestre/Linguaggi%20di%20Programmazione%201) | P.A. Bonatti | M. Faella | ⏳ |
