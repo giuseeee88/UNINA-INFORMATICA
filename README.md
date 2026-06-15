@@ -17,17 +17,17 @@ Repository dedicata alla raccolta e organizzazione del materiale didattico per i
 
 ---
 
-## 📚 Dashboard Corsi
+## 📚 Dashboard Corsi (A.A. 2025/2026)
 
 ### 🟢 Primo Anno (Canali: C1: A-DE, C2: DF-M, C3: N-Z)
 
 | Semestre | Materia | Canale 1 | Canale 2 | Canale 3 | Stato |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| 1° | [Architettura Elaboratori](./Primo%20Anno/Primo%20Semestre/Architettura%20degli%20Elaboratori) | S. Rossi | L. Sauro | R. Prevete | ✅ |
+| 1° | [Architettura Elaboratori](./Primo%20Anno/Primo%20Semestre/Architettura%20degli%20Elaboratori) | L. Sauro | S. Rossi | Da Definire | ✅ |
 | 1° | [Analisi Matematica I](./Primo%20Anno/Primo%20Semestre/Analisi%20Matematica%201) | R. Alicandro | D. Castorina | A.M. Barbagallo | ✅ |
-| 1° | [Programmazione 1](./Primo%20Anno/Primo%20Semestre/Programmazione%201) | L. Bozzelli | A. Origlia | A. Apicella | ✅ |
+| 1° | [Programmazione 1](./Primo%20Anno/Primo%20Semestre/Programmazione%201) | R. Prevete | D. Riccio/L. Sauro | F. Isgrò | ✅ |
 | 2° | [Algebra](./Primo%20Anno/Secondo%20Semestre/Algebra) | M.R. Celentani | G. Cutolo | M. Brescia | ✅ |
-| 2° | [Programmazione OO](./Primo%20Anno/Secondo%20Semestre/Programmazione%20Object%20Oriented) | S. Di Martino | P. Tramontana | A. Apicella | ✅ |
+| 2° | [Programmazione OO](./Primo%20Anno/Secondo%20Semestre/Programmazione%20Object%20Oriented) | S. Di Martino/M. Sangiovanni | P. Tramontana | B. Breve/R. Caccavale | ✅ |
 | 2° | [Basi di Dati](./Primo%20Anno/Secondo%20Semestre/Basi%20di%20Dati) | M. Sangiovanni | S. Barra | A. Calì | ✅ |
 
 ### 🟡 Secondo Anno (Canali: C1: A-G, C2: H-Z)
@@ -35,23 +35,29 @@ Repository dedicata alla raccolta e organizzazione del materiale didattico per i
 | Semestre | Materia | Canale 1 | Canale 2 | Stato |
 | :--- | :--- | :--- | :--- | :---: |
 | 1° | [Algoritmi e Strutture Dati](./Secondo%20Anno/Primo%20Semestre/Algoritmi%20e%20Strutture%20Dati) | M. Benerecetti | F. Mogavero | ✅ |
-| 1° | [Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | A. De Luca | A. Murano | ✅ |
-| 1° | [Geometria](./Secondo%20Anno/Primo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ✅ |
+| 1° | [Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | A. De Luca | A. De Luca | ✅ |
 | 1° | [Fisica Generale I](./Secondo%20Anno/Primo%20Semestre/Fisica%20Generale%201) | G. Chirco | G. Esposito | ✅ |
-| 1° | [Sistemi Operativi](./Secondo%20Anno/Secondo%20Semestre/Sistemi%20Operativi) | W. Balzano | A. Finzi | ⏳ |
+| 1° | [Sistemi Operativi](./Secondo%20Anno/Primo%20Semestre/Sistemi%20Operativi) | A. Finzi | W. Balzano | ⏳ |
+| 2° | [Geometria](./Secondo%20Anno/Secondo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ✅ |
 | 2° | [Analisi e Progettazione Algoritmi](./Secondo%20Anno/Secondo%20Semestre/Analisi%20e%20Progettazione%20di%20Algoritmi) | M. Benerecetti | F. Mogavero | ⏳ |
-| 2° | [Linguaggi Programmazione 1](./Secondo%20Anno/Secondo%20Semestre/Linguaggi%20di%20Programmazione%201) | P. Bonatti | M. Faella | ⏳ |
-| 2° | [Metodi Statistici](./Secondo%20Anno/Secondo%20Semestre/Metodi%20Statistici%20per%20l'informazione) | Da Definire | Da Definire | ⏳ |
+| 2° | [Linguaggi Programmazione 1](./Secondo%20Anno/Secondo%20Semestre/Linguaggi%20di%20Programmazione%201) | P.A. Bonatti | M. Faella | ⏳ |
+| 2° | [Metodi Statistici](./Secondo%20Anno/Secondo%20Semestre/Metodi%20Statistici%20per%20l'informazione) | M. Lops | M. Tanda | ⏳ |
 
-### 🔴 Terzo Anno
+### 🔴 Terzo Anno (Canali: C1: A-G, C2: H-Z)
 
-*Prossimamente...*
+| Semestre | Materia | Canale 1 | Canale 2 | Stato |
+| :--- | :--- | :--- | :--- | :---: |
+| 1° | [Reti e Programmazione Distribuita](./Terzo%20Anno/Primo%20Semestre/Reti%20e%20Programmazione%20Distribuita) | Da Definire | Da Definire | ⏳ |
+| 1° | [Tecnologie Web](./Terzo%20Anno/Primo%20Semestre/Tecnologie%20Web) | Da Definire | Da Definire | ⏳ |
+| 2° | [AI Technologies](./Terzo%20Anno/Secondo%20Semestre/AI%20Technologies) | Da Definire | Da Definire | ⏳ |
+| 2° | [Ingegneria del Software](./Terzo%20Anno/Secondo%20Semestre/Ingegneria%20del%20Software) | Da Definire | Da Definire | ⏳ |
 
 ---
 
 ## ℹ️ Informazioni Generali
 
 Nella cartella [**info-generali**](./info-generali) puoi trovare:
+- Guida dello Studente 25/26
 - Guida dello Studente 24/25
 - Orario delle Lezioni
 - Regolamento Didattico
