@@ -36,9 +36,9 @@ Repository dedicata alla raccolta e organizzazione del materiale didattico per i
 | :--- | :--- | :--- | :--- | :---: |
 | 1° | [Algoritmi e Strutture Dati](./Secondo%20Anno/Primo%20Semestre/Algoritmi%20e%20Strutture%20Dati) | M. Benerecetti | F. Mogavero | ✅ |
 | 1° | [Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | A. De Luca | A. De Luca | ✅ |
-| 1° | [Fisica Generale I](./Secondo%20Anno/Primo%20Semestre/Fisica%20Generale%201) | G. Chirco | G. Esposito | ✅ |
-| 1° | [Sistemi Operativi](./Secondo%20Anno/Primo%20Semestre/Sistemi%20Operativi) | A. Finzi | W. Balzano | ⏳ |
-| 2° | [Geometria](./Secondo%20Anno/Secondo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ✅ |
+| 1° | [Fisica Generale I](./Secondo%20Anno/Primo%20Semestre/Fisica%20Generale%201) | G. Chirco/G. De Rosa | G. Esposito | ✅ |
+| 1° | [Geometria](./Secondo%20Anno/Primo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ✅ |
+| 2° | [Sistemi Operativi](./Secondo%20Anno/Secondo%20Semestre/Sistemi%20Operativi) | A. Finzi | W. Balzano | ⏳ |
 | 2° | [Analisi e Progettazione Algoritmi](./Secondo%20Anno/Secondo%20Semestre/Analisi%20e%20Progettazione%20di%20Algoritmi) | M. Benerecetti | F. Mogavero | ⏳ |
 | 2° | [Linguaggi Programmazione 1](./Secondo%20Anno/Secondo%20Semestre/Linguaggi%20di%20Programmazione%201) | P.A. Bonatti | M. Faella | ⏳ |
 | 2° | [Metodi Statistici](./Secondo%20Anno/Secondo%20Semestre/Metodi%20Statistici%20per%20l'informazione) | M. Lops | M. Tanda | ⏳ |
