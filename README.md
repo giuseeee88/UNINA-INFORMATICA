@@ -1,65 +1,82 @@
-# UNINA-INFORMATICA
+# UNINA-INFORMATICA 🎓
 
-Repository dedicata al Corso di Laurea in Informatica presso l'Università degli Studi di Napoli Federico II. Anno accademico di inizio 2024-2025
+![GitHub last commit](https://img.shields.io/github/last-commit/Carloj005/UNINA-INFORMATICA?style=flat-square)
+![Repo Size](https://img.shields.io/github/repo-size/Carloj005/UNINA-INFORMATICA?style=flat-square)
+![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey?style=flat-square)
 
-**NOTA**: Il materiale è relativo solamente al gruppo 1, se siete di altri gruppi è molto probabie che avrete professori diversi, vi conviene in quel caso usare materiale relativo a quello specifico professore. Potete trovare tutto il materiale necessario e tutti i gruppi telegram [quì](https://t.me/+7HOZaOMbgSphNGM0) se vi dovesse servire altro
+Repository dedicata alla raccolta e organizzazione del materiale didattico per il Corso di Laurea Triennale in **Informatica** presso l'Università degli Studi di Napoli Federico II.
 
-**NOTA**: le cartelle indicate con completato sono praticamente gli esami che ho fatto quindi non per forza hanno contenuto dentro o contenuto completo, semplicemente è un mio remider per le cose che ho fatto
+---
 
-## Contenuti
+## 🗺️ Navigazione Rapida
 
-Questa repository raccoglie materiale didattico, appunti, dispense e progetti relativi al percorso universitario.
+- [Primo Anno](#-primo-anno)
+- [Secondo Anno](#-secondo-anno)
+- [Terzo Anno](#-terzo-anno)
+- [Informazioni Generali](#-informazioni-generali)
 
-### Struttura attuale:
-- **Primo Anno**: Materiale relativo ai corsi del primo anno.
-- **Secondo Anno**: Materiale relativo ai corsi del secondo anno.
-- **Terzo Anno**: Coming Soon, Stay tuned
-- **Guida Triennale**: Informazioni generali sul corso di studi. [**ATTENZIONE NON SEMPRE AGGIORNATA PER MIGLIOR PRECISIONE ANDARE SUL SITO E SCARICARE IL DOCUMENTO RELATIVO AL VOSTRO ANNO**](https://informatica.dieti.unina.it/index.php/it/laurea-triennale/guide-studenti-triennale)
+---
 
-## Obiettivo
+## 📚 Dashboard Corsi
 
-L'obiettivo di questa repository è fungere da cloud pubblico per centralizzare tutte le risorse universitarie, facilitandone l'accesso e l'organizzazione nel tempo e la fruizione del materiale didattico. La repository verrà aggiornata costantemente con l'avanzare del percorso accademico.
+### 🟢 Primo Anno
 
-## Come usare e aggiornare questa repository
+| Semestre | Materia | Professore (Canale 1) | Stato |
+| :--- | :--- | :--- | :---: |
+| 1° | [Architettura degli Elaboratori](./Primo%20Anno/Primo%20Semestre/Architettura%20degli%20Elaboratori) | Silvia Rossi | ✅ |
+| 1° | [Analisi Matematica I](./Primo%20Anno/Primo%20Semestre/Analisi%20Matematica%201) | Francesco Oliva | ✅ |
+| 1° | [Programmazione 1](./Primo%20Anno/Primo%20Semestre/Programmazione%201) | Giuliano Laccetti | ✅ |
+| 2° | [Algebra](./Primo%20Anno/Secondo%20Semestre/Algebra) | M. Rosaria Celentani | ✅ |
+| 2° | [Programmazione Object-Oriented](./Primo%20Anno/Secondo%20Semestre/Programmazione%20Object%20Oriented) | Sergio Di Martino | ✅ |
+| 2° | [Basi di Dati](./Primo%20Anno/Secondo%20Semestre/Basi%20di%20Dati) | Mara Sangiovanni | ✅ |
 
-Se vuoi avere tutto il materiale sul tuo computer e tenerlo sempre aggiornato con le ultime modifiche, segui questi semplici passaggi. Non preoccuparti se non hai mai usato Git o GitHub!
+### 🟡 Secondo Anno
 
-### 1. Installazione (Solo la prima volta)
+| Semestre | Materia | Professore (Canale 1) | Stato |
+| :--- | :--- | :--- | :---: |
+| 1° | [Algoritmi e Strutture Dati](./Secondo%20Anno/Primo%20Semestre/Algoritmi%20e%20Strutture%20Dati) | Massimo Benerecetti | ✅ |
+| 1° | [Elementi di Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | Alessandro De Luca | ✅ |
+| 1° | [Geometria](./Secondo%20Anno/Primo%20Semestre/Geometria) | Francesca Cioffi | ✅ |
+| 1° | [Fisica Generale I](./Secondo%20Anno/Primo%20Semestre/Fisica%20Generale%201) | Goffredo Chirco | ✅ |
+| 2° | [Analisi e Progettazione di Algoritmi](./Secondo%20Anno/Secondo%20Semestre/Analisi%20e%20Progettazione%20di%20Algoritmi) | Massimo Benerecetti | ⏳ |
+| 2° | [Sistemi Operativi](./Secondo%20Anno/Secondo%20Semestre/Sistemi%20Operativi) | Walter Balzano | ⏳ |
+| 2° | [Linguaggi di Programmazione 1](./Secondo%20Anno/Secondo%20Semestre/Linguaggi%20di%20Programmazione%201) | Piero Bonatti | ⏳ |
+| 2° | [Metodi Statistici per l'Informazione](./Secondo%20Anno/Secondo%20Semestre/Metodi%20Statistici%20per%20l'informazione) | Da Definire | ⏳ |
 
-Per scaricare e aggiornare automaticamente la cartella, devi installare un piccolo programma chiamato **Git**.  
+### 🔴 Terzo Anno
 
-- **Windows**:
-  - **Metodo veloce (Terminale/PowerShell)**: Scrivi winget install -e --id Git.Git
-  - **Metodo classico**: Scarica l'installer da [git-scm.com](https://git-scm.com/download/win).
-- **macOS**:
-  - **Metodo veloce (Homebrew)**: Scrivi rew install git
-  - **Metodo classico**: Apri il Terminale, scrivi git --version e segui le istruzioni per installare i "Command Line Tools".
-- **Linux**:
-  - Ubuntu/Debian: sudo apt install git
-  - Fedora: sudo dnf install git
-  - Arch Linux: sudo pacman -S git
+*Prossimamente...*
 
-> **Nota per file grandi**: Questa repository utilizza **Git LFS** per gestire PDF e dispense pesanti. Dopo aver installato Git, scrivi nel terminale: git lfs install per assicurarti di scaricare correttamente tutti i file.
+---
 
-### 2. Scaricare la repository sul tuo PC (Clone)
+## ℹ️ Informazioni Generali
 
-Una volta installato Git, scegli una cartella sul tuo computer dove vuoi salvare il materiale (es. Documenti).  
+Nella cartella [**info-generali**](./info-generali) puoi trovare:
+- Guida dello Studente 24/25
+- Orario delle Lezioni
+- Regolamento Didattico
 
-1. Apri il terminale (su Windows si chiama **Git Bash** o **PowerShell**).
-2. Scrivi il seguente comando e premi Invio:
-   `ash
-   git clone https://github.com/Carloj005/UNINA-INFORMATICA.git
-   `
-3. Ora avrai una cartella chiamata UNINA-INFORMATICA con tutto il contenuto.
+---
 
-### 3. Aggiornare periodicamente il materiale (Pull)
+## 🛠️ Struttura della Repository
 
-Quando vengono aggiunti nuovi appunti o modifiche su GitHub, basta aggiornare la cartella che hai già senza riscaricare tutto:
+Ogni corso è organizzato seguendo questo schema:
+```text
+corso-nome/
+├── Prof-NomeCognome/      # Materiale suddiviso per docente
+│   ├── slides/            # Materiale ufficiale
+│   ├── appunti/           # Note e riassunti personali
+│   ├── esercizi/          # Esercitazioni
+│   ├── progetti/          # Codice e relazioni
+│   ├── esami/             # Tracce e soluzioni
+│   ├── libri/             # Libri di testo
+│   └── contenuto-non-proprio/ # Materiale di altri studenti (con crediti)
+└── README.md              # Stato dell'esame e info generali
+```
 
-1. Apri il terminale dentro la cartella UNINA-INFORMATICA.
-2. Scrivi questi comandi:
-   `ash
-   git fetch origin
-   git pull
-   `
-3. Git scaricherà solo i file nuovi o modificati. Consigliamo di farlo ogni volta che vuoi studiare!
+---
+
+## ⚖️ Licenza
+
+Questo materiale è distribuito sotto licenza **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**.
+Consultare il file [LICENSE](./LICENSE) per i dettagli.

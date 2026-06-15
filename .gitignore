@@ -1,0 +1,28 @@
+# .gitignore globale per UNINA-INFORMATICA
+
+# Metadati IDE e Editor
+.project
+.classpath
+.settings/
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# File temporanei di compilazione
+bin/
+obj/
+*.class
+*.exe
+*.o
+*.so
+*.dll
+*.pyc
+__pycache__/
+
+# Documenti temporanei
+~$*
+*.log
+*.tmp
