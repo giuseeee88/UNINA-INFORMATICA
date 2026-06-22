@@ -58,3 +58,6 @@
 58. Cos'è il Livelock e in cosa si differenzia dal Deadlock?
 59. Funzionamento hardware degli SSD: memorie Flash NAND e Wear Leveling
 60. Meccanismo della Open File Table: perché il SO usa due tabelle distinte?
+61. I Monitor: cosa sono, qual è la loro struttura e come gestiscono la sincronizzazione?
+62. Il problema del Double Caching nel File System e il ruolo della Cache Unificata
+63. Struttura a livelli (layers) del File System e relative responsabilità

@@ -238,3 +238,44 @@ Quando un processo esegue la system call `open()`, il sistema operativo non si l
 1) **Tabella dei file aperti di sistema (System-wide):** È globale e contiene una copia dei metadati del file (FCB/inode) e un contatore dei riferimenti (per sapere quanti processi lo stanno usando).
 2) **Tabella dei file aperti per-processo:** È privata di ogni singolo processo. Contiene i puntatori alle righe della tabella di sistema e, soprattutto, traccia l'**offset di lettura/scrittura (file pointer)** corrente di *quel* processo. 
 Questa separazione permette a due processi distinti di leggere lo stesso identico file in RAM contemporaneamente, ma mantenendo posizioni di lettura (offset) separate e indipendenti.
+
+**61. I Monitor: cosa sono, qual è la loro struttura e come gestiscono la sincronizzazione?**
+Un **Monitor** è un'astrazione software di alto livello (introdotta da Hoare nel 1974) che fornisce un meccanismo di sincronizzazione comodo ed efficiente per i processi. A differenza dei semafori, che richiedono al programmatore di inserire manualmente le chiamate `wait` e `signal` (con alto rischio di deadlock o race conditions), il monitor garantisce la **mutua esclusione automatica**: solo un processo alla volta può essere attivo all'interno del monitor.
+
+**Struttura principale:**
+* **Dati condivisi**: Le variabili private accessibili solo dalle procedure del monitor.
+* **Operazioni/Procedure**: Funzioni pubbliche chiamate dai processi esterni per accedere ai dati.
+* **Codice di inizializzazione**: Imposta lo stato iniziale dei dati privati.
+* **Coda di accesso (Entry Queue)**: I processi che provano ad accedere al monitor mentre questo è già occupato vengono messi in questa coda di attesa.
+* **Variabili di Condizione (Condition Variables)**: Consentono di sospendere i processi in attesa di specifiche condizioni logiche. Le operazioni permesse sono:
+  * `x.wait()`: Il processo che la chiama viene sospeso immediatamente e inserito nella coda associata alla condizione `x`, rilasciando il controllo del monitor.
+  * `x.signal()`: Riprende l'esecuzione di un processo sospeso sulla coda di `x`. Se non ci sono processi in attesa, l'operazione non ha alcun effetto.
+
+**Semantica di risveglio (Signal and Wait vs Signal and Continue):**
+Se un processo $P$ esegue `x.signal()` riattivando un processo $Q$ che era sospeso su `x.wait()`, non possono essere attivi entrambi contemporaneamente nel monitor. Si definiscono due approcci:
+* **Signal and Wait (Hoare):** $P$ cede subito il monitor a $Q$ e si sospende in una coda interna (`next`) in attesa che $Q$ esca dal monitor o si blocchi a sua volta.
+* **Signal and Continue (Mesa):** $P$ continua l'esecuzione fino al termine della sua procedura all'interno del monitor. $Q$ viene messo in una coda dei pronti per rientrare nel monitor non appena si libererà.
+
+**62. Il problema del Double Caching nel File System e il ruolo della Cache Unificata**
+Nei sistemi operativi tradizionali, l'I/O dei file passava per due livelli separati di caching in memoria RAM:
+1. **Buffer Cache**: Gestita a basso livello dal kernel per memorizzare i blocchi del dispositivo di memorizzazione di massa (I/O orientato ai blocchi).
+2. **Page Cache**: Utilizzata dal sistema di memoria virtuale per memorizzare le pagine di codice e dati dei processi utente (I/O orientato alle pagine, es. per file mappati in memoria tramite `mmap`).
+
+Il **problema del Double Caching (o Double Buffering)** si verifica quando lo stesso file viene aperto contemporaneamente sia tramite chiamate di sistema standard (`read`/`write`) sia tramite mappatura in memoria (`mmap`). I dati devono essere prima letti dal disco e messi nella *buffer cache*, e successivamente copiati nella *page cache* della memoria virtuale per essere accessibili dal processo mappato.
+
+**Conseguenze:**
+* **Spreco di memoria RAM**: Lo stesso dato risiede in due aree cache distinte contemporaneamente.
+* **Overhead di CPU e I/O**: Copie inutili di dati tra i due buffer.
+* **Inconsistenza dei dati**: Se un processo scrive usando `write()` (aggiornando la buffer cache) e un altro legge tramite memoria virtuale (accedendo alla page cache), i due vedranno dati non sincronizzati.
+
+**Soluzione (Buffer Cache Unificata):**
+Nei sistemi operativi moderni si adotta una **Cache Unificata (Unified Buffer Cache)**. Il sistema di memoria virtuale e il file system condividono la stessa identica cache. Qualsiasi operazione di lettura, scrittura o mappatura in memoria accede allo stesso set di pagine fisiche gestite dal kernel. Questo elimina la doppia copia di cache, risparmiando RAM e CPU, e garantisce l'assoluta coerenza delle letture e scritture concorrenti.
+
+**63. Struttura a livelli (layers) del File System e relative responsabilità**
+Per semplificare la progettazione e ridurre la complessità, l'architettura del File System è strutturata a livelli (layers), dove ogni livello fornisce servizi al livello superiore e si appoggia su quello inferiore:
+1. **File System Logico (Logical File System):** Gestisce i metadati del file. È responsabile della struttura delle directory, dei permessi di accesso, della traduzione dei nomi dei file in identificativi interni (*inode numbers*) e del mantenimento dei File Control Block (FCB).
+2. **Modulo di Organizzazione dei File (File Organization Module):** Traduce i blocchi logici del file (es. il blocco 3 del file "documento.txt") nei corrispondenti blocchi fisici del disco (es. il settore LBA 5432). Gestisce i metodi di allocazione (contigua, concatenata o indicizzata) e traccia lo spazio libero sul disco.
+3. **File System di Base (Basic File System):** Riceve comandi generici per leggere/scrivere blocchi fisici del disco identificati dal loro indirizzo fisico. Gestisce i buffer in memoria RAM che contengono i blocchi del file system e del disco per velocizzare i successivi accessi.
+4. **Controllo dei Dispositivi (I/O Control / Device Drivers):** Consiste nei driver hardware e nei gestori delle interruzioni (Interrupt Handlers). Traduce i comandi generici (es. "leggi blocco 120 del disco 1") in comandi hardware a basso livello (scrittura nei registri di controllo del controller del disco, come SATA o NVMe, o comandi DMA).
+5. **Dispositivi Fisici (Physical Devices):** L'hardware fisico reale (dischi HDD magnetici, memorie a stato solido SSD o dischi ottici) che esegue fisicamente la memorizzazione magnetica o elettrica dei bit.
+
