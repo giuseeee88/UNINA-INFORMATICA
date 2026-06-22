@@ -10,6 +10,13 @@ Repository dedicata alla raccolta e organizzazione del materiale didattico per i
 
 > **⚠️ Disclaimer:** Il materiale qui presente (appunti, riassunti, sbobine) è redatto in gran parte da studenti e potrebbe contenere inesattezze. Usalo come supporto, ma ricorda che non sostituisce lo studio sul materiale ufficiale consigliato dai docenti.
 
+## 📊 Valutazione Corsi e Docenti
+Hai seguito un corso o superato un esame? Lascia una valutazione del tutto anonima per aiutare i futuri studenti!  
+Compila il nostro [**Google Form di Valutazione**](https://forms.gle/seGUyzc2HiRxmpDs9) per condividere la tua opinione su:
+*   Difficoltà dell'esame e del corso.
+*   Chiarezza, esposizione e disponibilità del docente.
+*   Qualità del materiale didattico e modalità d'esame.
+
 ## 🎯 Obiettivo
 L'obiettivo di questa repository è fungere da cloud pubblico per centralizzare tutte le risorse universitarie, facilitandone l'accesso, l'organizzazione nel tempo e la fruizione del materiale didattico. La repository verrà aggiornata costantemente con l'avanzare del percorso accademico.
 
@@ -98,7 +105,7 @@ Quando vengono aggiunti nuovi appunti o modifiche su GitHub, basta aggiornare la
 | 1° | [Informatica Teorica](./Secondo%20Anno/Primo%20Semestre/Elementi%20di%20Informatica%20Teorica) | A. De Luca | A. De Luca | ⏳ |
 | 1° | [Fisica Generale I](./Secondo%20Anno/Primo%20Semestre/Fisica%20Generale%201) | G. Chirco/G. De Rosa | G. Esposito | ✅ |
 | 1° | [Geometria](./Secondo%20Anno/Primo%20Semestre/Geometria) | F. Cioffi | M. Trombetti | ⏳ |
-| 2° | [Sistemi Operativi](./Secondo%20Anno/Secondo%20Semestre/Sistemi%20Operativi) | A. Finzi | W. Balzano | ⏳ |
+| 2° | [Sistemi Operativi](./Secondo%20Anno/Secondo%20Semestre/Sistemi%20Operativi) | A. Finzi | W. Balzano | ✅ |
 | 2° | [Analisi e Progettazione Algoritmi](./Secondo%20Anno/Secondo%20Semestre/Analisi%20e%20Progettazione%20di%20Algoritmi) | M. Benerecetti | F. Mogavero | ⏳ |
 | 2° | [Linguaggi Programmazione 1](./Secondo%20Anno/Secondo%20Semestre/Linguaggi%20di%20Programmazione%201) | P.A. Bonatti | M. Faella | ⏳ |
 | 2° | [Metodi Statistici](./Secondo%20Anno/Secondo%20Semestre/Metodi%20Statistici%20per%20l'informazione) | M. Lops | M. Tanda | ⏳ |

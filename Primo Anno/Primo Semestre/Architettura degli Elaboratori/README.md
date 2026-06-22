@@ -3,7 +3,7 @@
 ## Informazioni Corso
 - **Anno:** 1
 - **Semestre:** 1
-- **Stato:** ⏳ In Corso
+- **Stato:** ✅ Completato
 
 ## Professori
 - Prof. LuigiSauro
