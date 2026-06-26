@@ -170,9 +170,23 @@ corso-nome/
 ---
 
 ## 🤝 Come Contribuire
-Hai vecchie tracce, appunti ben scritti o correzioni da suggerire? Il contributo di tutti è benvenuto!
-1. Fai una **Pull Request** proponendo i tuoi file (rispettando la struttura delle cartelle).
-2. Se il materiale non è tuo, inseriscilo in `contenuto-non-proprio` e aggiungi un piccolo file di testo (es. `crediti.txt`) per ringraziare l'autore originale.
+
+Hai vecchie tracce, appunti ben scritti o correzioni da suggerire? Il contributo di tutti è benvenuto! Puoi contribuire in due modi: tramite **Pull Request** (se vuoi caricare direttamente i file) o tramite le **Issues** (per segnalazioni o richieste).
+
+### 🛠️ 1. Proporre modifiche con una Pull Request (PR)
+Se hai dei file da aggiungere o vuoi correggere qualcosa direttamente nel codice:
+1. **Fai un Fork**: Clicca sul tasto **Fork** in alto a destra su questa pagina per creare una copia della repository sul tuo account GitHub.
+2. **Carica i file**: Nella tua copia (fork), naviga nella cartella corretta rispettando la [struttura della repository](#-struttura-della-repository) e carica i file (tramite l'interfaccia web di GitHub cliccando su *Add file -> Upload files*, oppure via Git da terminale).
+   - *Nota*: Se il materiale non è tuo, inseriscilo nella cartella `contenuto-non-proprio` del relativo corso e aggiungi un piccolo file `crediti.txt` per ringraziare l'autore originale.
+3. **Fai il Commit**: Salva le modifiche inserendo un messaggio chiaro (es. `Aggiunti appunti di Analisi 1`).
+4. **Apri la Pull Request**: Torna sulla repository principale `Carloj005/UNINA-INFORMATICA`, clicca sulla scheda **Pull Requests** e poi su **New Pull Request**. Seleziona il tuo fork e invia la richiesta. Verrà esaminata e unita al progetto principale!
+
+### 💬 2. Segnalare problemi o richiedere materiale con le Issues
+Se non sai usare Git, hai trovato un errore negli appunti, o vuoi semplicemente richiedere del materiale specifico (es. una traccia d'esame mancante):
+1. Vai nella scheda [**Issues**](https://github.com/Carloj005/UNINA-INFORMATICA/issues) in alto.
+2. Clicca sul pulsante verde **New Issue**.
+3. Inserisci un titolo chiaro (es. *[Richiesta] Traccia Sistemi Operativi 15-01-2026* oppure *[Errore] Refuso a pagina 4 appunti Geometria Cioffi*).
+4. Descrivi dettagliatamente la tua segnalazione o richiesta nel box di testo e clicca su **Submit new issue**.
 
 ---
 
