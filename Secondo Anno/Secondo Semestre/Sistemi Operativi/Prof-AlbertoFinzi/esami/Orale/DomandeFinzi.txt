@@ -61,3 +61,5 @@
 61. I Monitor: cosa sono, qual è la loro struttura e come gestiscono la sincronizzazione?
 62. Il problema del Double Caching nel File System e il ruolo della Cache Unificata
 63. Struttura a livelli (layers) del File System e relative responsabilità
+64. Earliest Deadline First (EDF) Scheduling
+65. Rate Monotonic (RM) Scheduling
