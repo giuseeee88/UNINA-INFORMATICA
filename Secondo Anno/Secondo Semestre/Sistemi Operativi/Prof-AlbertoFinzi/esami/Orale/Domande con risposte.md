@@ -279,3 +279,34 @@ Per semplificare la progettazione e ridurre la complessità, l'architettura del 
 4. **Controllo dei Dispositivi (I/O Control / Device Drivers):** Consiste nei driver hardware e nei gestori delle interruzioni (Interrupt Handlers). Traduce i comandi generici (es. "leggi blocco 120 del disco 1") in comandi hardware a basso livello (scrittura nei registri di controllo del controller del disco, come SATA o NVMe, o comandi DMA).
 5. **Dispositivi Fisici (Physical Devices):** L'hardware fisico reale (dischi HDD magnetici, memorie a stato solido SSD o dischi ottici) che esegue fisicamente la memorizzazione magnetica o elettrica dei bit.
 
+**64. Earliest Deadline First (EDF) Scheduling**
+**Descrizione:**
+L'**Earliest Deadline First (EDF)** è un algoritmo di scheduling **dinamico** utilizzato nei sistemi operativi Real-Time preemptive. A differenza degli algoritmi statici, in EDF le priorità dei task non sono assegnate a priori in base a caratteristiche fisse (come il periodo), ma cambiano continuamente nel tempo durante l'esecuzione del sistema.
+
+* **La Regola Fondamentale:** Lo scheduler seleziona e assegna la CPU al task che ha la **scadenza (deadline) imminente** più vicina. Più la scadenza è vicina, più la priorità del task diventa alta.
+* **Analogia (Il Piatto in Scadenza):** Immagina la cucina di un ristorante che deve gestire ordini speciali con tempi di consegna rigidi. La filosofia di EDF impone che *"il piatto che deve essere pronto tassativamente tra 2 minuti ha la priorità assoluta su quello che deve essere pronto tra 10 minuti"*, indipendentemente da chi lo abbia ordinato o dalla frequenza con cui quell'ordine arriva.
+
+**Vantaggi:**
+* **Ottimalità teorica:** EDF è un algoritmo teoricamente **ottimale** per sistemi Real-Time a singolo processore con prelazione. Questo significa che se un insieme di task può essere schedulato da un qualsiasi altro algoritmo senza violare le scadenze, EDF ci riuscirà sicuramente.
+* **Sfruttamento della CPU:** Può raggiungere un utilizzo della CPU pari al **100%** garantendo al contempo il rispetto di tutte le scadenze.
+
+**Svantaggi:**
+* **Complessità di implementazione:** Richiede un monitoraggio costante a runtime di tutte le scadenze e il ricalcolo continuo delle priorità a ogni arrivo di un nuovo task, introducendo un overhead hardware/software maggiore.
+* **Comportamento imprevedibile in sovraccarico (Domino Effect):** Se il sistema sperimenta un sovraccarico (anche temporaneo) e un task manca la sua deadline, si può verificare un effetto domino in cui **tutti o quasi tutti i task successivi perderanno la loro scadenza**, rendendo il sistema instabile e imprevedibile.
+
+---
+
+**65. Rate Monotonic (RM) Scheduling**
+**Descrizione:**
+Il **Rate-Monotonic (RM)** è l'algoritmo di scheduling standard e più comune per i sistemi Real-Time a priorità **statica**. In questo algoritmo, le priorità vengono assegnate ai task prima dell'inizio dell'esecuzione (in fase di design) e rimangono rigorosamente invariate per tutta la durata del ciclo di vita del sistema.
+
+* **La Regola Fondamentale:** RM assegna le priorità basandosi esclusivamente sulla **frequenza di attivazione (Rate)** dei task, che è inversamente proporzionale al loro periodo ($T$). I task con un **periodo più breve** (ovvero quelli che devono essere eseguiti più frequentemente) ricevono una **priorità più alta**.
+* **Analogia (L'Ordine Frequente):** Sempre nella nostra cucina, la filosofia di RM impone che *"il cliente abituale che effettua un ordine fisso ogni 5 minuti riceve sempre la priorità rispetto al cliente che ordina un piatto ogni 10 minuti"*. La priorità è legata alla rigidità temporale della frequenza e non cambia mai.
+
+**Vantaggi:**
+* **Semplicità e Prevedibilità:** È estremamente semplice da implementare poiché lo scheduler deve solo confrontare valori di priorità fissi. Inoltre, il comportamento del sistema è altamente prevedibile anche in condizioni di stress.
+* **Punto di riferimento (Baseline):** Se un set di task con scadenze uguali ai periodi è schedulabile con un algoritmo a priorità statica, è garantito che sia schedulabile con RM, il quale rappresenta l'algoritmo statico ottimale.
+
+**Svantaggi:**
+* **Non sempre ottimale per l'utilizzo della CPU:** RM non è flessibile come EDF. Il limite superiore di utilizzo della CPU (bound di Liu e Layland) oltre il quale non è assicurata la schedulabilità decade all'aumentare dei task, stabilizzandosi intorno al **69.3%** ($\ln 2$). Pertanto, potrebbe rifiutare o non riuscire a gestire insiemi di task che l'algoritmo dinamico EDF risolverebbe agevolmente.
+
