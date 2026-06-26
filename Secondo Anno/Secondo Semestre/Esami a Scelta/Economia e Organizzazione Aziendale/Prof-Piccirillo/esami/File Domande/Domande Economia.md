@@ -1,6 +1,9 @@
-# Dispensa Completa Domande e Risposte - Esame di Economia ed Organizzazione Aziendale
+# Dispensa di Domande e Risposte - Esame di Economia ed Organizzazione Aziendale
 
-Questo documento contiene 56 domande e risposte strutturate, coprendo il 100% degli argomenti affrontati nel corso (Prof. Piccirillo), unendo le nozioni base con gli approfondimenti tecnici finali emersi dalle slide.
+Questo documento contiene 56 domande e risposte generate tramite AI (Gemini 3.1 Pro unito allo strumento Notebooklm) strutturate, coprendo buona parte (se non tutta) degli argomenti affrontati nel corso (Prof. Piccirillo), unendo le nozioni base con gli approfondimenti tecnici finali emersi dalle slide.
+
+> **⚠️ Disclaimer:** Il materiale qui presente in quanto generato dall'AI potrebbe contenere inesattezze (molto difficile dato che è stato usato Gemini 3.1 Pro unito allo strumento Notebooklm). Usalo come supporto, ma ricorda che non sostituisce lo studio sul materiale ufficiale consigliato dai docenti. Potrebbe non coprire tutto e NON ASSICURA il superamento dell'esame al 100%, lo studio individuale è importante ma sicuramente questo file vi permette almeno di non partire da 0 ed avere un'idea di ciò che potreste affrontare. Spero che vi sia di aiuto a tutti quanti
+
 
 ## Sezione 1: L'impresa, il sistema e la produzione
 
