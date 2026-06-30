@@ -245,3 +245,15 @@ Descrive in dettaglio come l'azienda funzionerà concretamente a livello operati
 
 **56. Cosa si intende per "Segmentazione del mercato" nella stesura di un Business Plan o nella Strategia?**
 È il processo strategico attraverso il quale l'azienda divide il mercato globale (che di base è troppo ampio ed eterogeneo) in sottogruppi (segmenti) omogenei di clienti ideali, che condividono bisogni, caratteristiche o abitudini simili. Si utilizzano criteri demografici (età, sesso), geografici (regione), psicografici (stile di vita) o comportamentali (abitudini d'acquisto) per individuare il target preciso a cui indirizzare i propri prodotti e sforzi di marketing.
+
+**57. Cosa stabilisce il Principio della Prudenza nella redazione del bilancio?**
+È un principio contabile fondamentale (spesso un postulato di bilancio) secondo cui si devono contabilizzare le perdite e i rischi anche se sono solo probabili, mentre gli utili possono essere registrati solo se sono stati effettivamente realizzati alla data di chiusura dell'esercizio. Serve a evitare di sovrastimare il patrimonio aziendale e distribuire dividendi fittizi.
+
+**58. Cosa si intende per Sostenibilità Economica di un'impresa?**
+È la capacità dell'impresa di generare ricchezza in modo duraturo nel lungo periodo. Un'azienda è economicamente sostenibile quando il flusso dei ricavi è strutturalmente in grado di coprire tutti i costi dei fattori produttivi impiegati, garantendo anche un'adeguata remunerazione a chi ha fornito il capitale di rischio (gli azionisti) e permettendo lo sviluppo futuro.
+
+**59. Cosa rappresenta concettualmente il Passivo dello Stato Patrimoniale e a quale postulato/equazione si collega?**
+Il Passivo (che comprende i debiti verso terzi) insieme al Patrimonio Netto (il capitale proprio) rappresenta le **Fonti di finanziamento**. Ci dice, in pratica, da dove sono arrivati i soldi che l'azienda ha usato per comprare ciò che possiede (l'Attivo). Il postulato (o equazione) fondamentale di bilancio su cui si basa tutta la contabilità è l'uguaglianza tra impieghi e fonti: **Attivo = Passivo + Patrimonio Netto**.
+
+**60. Come si "fa" (qual è l'iter di redazione) il Bilancio d'Esercizio?**
+La redazione materiale deriva dalla chiusura dei conti di fine anno (applicando gli assestamenti come ratei, risconti e ammortamenti). L'iter formale e giuridico prevede che la "bozza" del bilancio sia redatta dagli **Amministratori** (o dal Consiglio di Amministrazione). Questo progetto viene poi passato agli organi di controllo (es. **Collegio Sindacale** o revisori) per una verifica. Infine, viene presentato all'**Assemblea dei Soci**, che ha il compito di discuterlo e approvarlo definitivamente (solitamente entro 120 giorni dalla chiusura dell'anno).
